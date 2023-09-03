@@ -1,6 +1,7 @@
 import './App.sass';
 import { useState } from 'react';
 import { v4 as uuid } from 'uuid';
+import TableRow from './TableRow';
 
 function App() {
 
@@ -105,13 +106,8 @@ function App() {
           </tr>
         </thead>
         <tbody className='App__tbody'>
-          {members.map(({id, memberName, memberSurname, memberAge, memberCity}) => (
-            <tr key={id}>
-              <td>{memberName}</td>
-              <td>{memberSurname}</td>
-              <td>{memberAge}</td>
-              <td>{memberCity}</td>
-            </tr>
+          {members.map((member) => (
+            <TableRow member={member} key={member.id}/>
           ))}
         </tbody>
       </table>
