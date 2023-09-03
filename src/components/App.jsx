@@ -2,6 +2,7 @@ import './App.sass';
 import { useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import TableRow from './TableRow';
+import InputField from './InputField';
 
 function App() {
 
@@ -54,43 +55,27 @@ function App() {
   return (
     <div className='App'>
       <form className='App__form' onSubmit={handleAddMemberSubmit}>
-        <input
-          type='text'
+        <InputField
           name='memberName'
-          required='required'
           placeholder='Name'
-          onFocus={(e) => e.target.placeholder = ''}
-          onBlur={(e) => e.target.placeholder = 'Name'}
           onChange={handleAddMemberChange}
           value={addMemberData.memberName}
         />
-        <input
-          type='text'
+        <InputField
           name='memberSurname'
-          required='required'
           placeholder='Surname'
-          onFocus={(e) => e.target.placeholder = ''}
-          onBlur={(e) => e.target.placeholder = 'Surname'}
           onChange={handleAddMemberChange}
           value={addMemberData.memberSurname}
         />
-        <input
-          type='text'
+        <InputField
           name='memberAge'
-          required='required'
           placeholder='Age'
-          onFocus={(e) => e.target.placeholder = ''}
-          onBlur={(e) => e.target.placeholder = 'Age'}
           onChange={handleAddMemberChange}
           value={addMemberData.memberAge}
         />
-        <input
-          type='text'
+        <InputField
           name='memberCity'
-          required='required'
           placeholder='City'
-          onFocus={(e) => e.target.placeholder = ''}
-          onBlur={(e) => e.target.placeholder = 'City'}
           onChange={handleAddMemberChange}
           value={addMemberData.memberCity}
         />
