@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import TableRow from './TableRow';
 import InputField from './InputField';
+import SelectField from './SelectField';
 
 function App() {
 
@@ -73,7 +74,7 @@ function App() {
           onChange={handleAddMemberChange}
           value={addMemberData.memberAge}
         />
-        <InputField
+        <SelectField
           name='memberCity'
           placeholder='City'
           onChange={handleAddMemberChange}
