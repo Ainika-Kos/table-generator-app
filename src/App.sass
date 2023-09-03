@@ -1,13 +1,72 @@
+$formBodyBcg: #ffffff
+$formBorderRadius: 4px
+$formInputBorder: #E6ECEF
+$formInputColor: #000000
+$formInputPlaceholderColor: #868A8D
+$formButtonBcg: #1493FE
+$formButtonColor: #ffffff
 $tableHeadBcg: #0A508B
 $tableHeadColor: #ffffff
 $tableBodyBcg: #ffffff
+$tableBodyBorder: #EBEBEB
 
 .App
   width: 100%
-  padding: 30px
+  padding: 10px
   height: auto
   display: flex
-  justify-content: center
+  flex-direction: column
+  align-items: center
+
+  &__form
+    position: relative
+    width: 100%
+    max-width: 250px
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    background-color: $formBodyBcg
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15)
+    border-radius: $formBorderRadius
+    padding: 20px 16px
+    margin: 30px auto 40px auto
+    gap: 10px
+
+    input
+      width: 100%
+      padding: 14px
+      border-radius: $formBorderRadius
+      border: 1px solid $formInputBorder
+      color: $formInputColor
+      outline: none
+      transition: border 0.3s ease
+
+      &:focus
+        border: 1px solid $formButtonBcg
+
+      &::-webkit-input-placeholder
+        color: $formInputPlaceholderColor
+
+    &__button
+      width: 100%
+      display: flex
+      justify-content: center
+      align-items: center
+      padding: 14px
+      border-radius: $formBorderRadius
+      background-color: $formButtonBcg
+      color: $formButtonColor
+      border: none
+      outline: none
+      text-transform: uppercase
+      font-weight: 700
+      cursor: pointer
+      transition: opacity 0.3s ease
+      will-change: opacity
+
+      &:hover
+        opacity: 0.8
 
   &__table
     width: 100%
@@ -21,7 +80,7 @@ $tableBodyBcg: #ffffff
       gap: 1px
     
     td
-      border: solid 1px #EBEBEB
+      border: solid 1px $tableBodyBorder
 
   &__thead
     background-color: $tableHeadBcg
