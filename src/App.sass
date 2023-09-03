@@ -1,0 +1,33 @@
+$tableHeadBcg: #0A508B
+$tableHeadColor: #ffffff
+$tableBodyBcg: #ffffff
+
+.App
+  width: 100%
+  padding: 30px
+  height: auto
+  display: flex
+  justify-content: center
+
+  &__table
+    width: 100%
+    max-width: 600px
+    border-collapse: collapse
+    text-align: left
+
+    td,
+    th
+      padding: 9px 12px
+      gap: 1px
+    
+    td
+      border: solid 1px #EBEBEB
+
+  &__thead
+    background-color: $tableHeadBcg
+    color: $tableHeadColor
+    opacity: 0.5
+
+  &__tbody
+    background-color: $tableBodyBcg
+    border-collapse: separate
