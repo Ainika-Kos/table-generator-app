@@ -6,17 +6,20 @@ import InputField from './InputField/InputField';
 import SelectField from './SelectField/SelectField';
 import Button from './Button/Button';
 
+
+const initialAddMemberData = {
+  id: '',
+  memberName: '',
+  memberSurname: '',
+  memberAge: '',
+  memberCity: ''
+};
+
 function App() {
 
   const [members, setMembers] = useState([]);
   const [formisValid, setFormIsValid] = useState(false);
-  const [addMemberData, setAddMemberData] = useState({
-    id: '',
-    memberName: '',
-    memberSurname: '',
-    memberAge: '',
-    memberCity: ''
-  });
+  const [addMemberData, setAddMemberData] = useState(initialAddMemberData);
 
   useEffect(() => {
     const isValidForm = validateForm();
@@ -52,14 +55,16 @@ function App() {
   const handleAddMember = (newMember) => {
     const newMembers = [...members, newMember];
     setMembers(newMembers);
-    setAddMemberData({
-      id: '',
-      memberName: '',
-      memberSurname: '',
-      memberAge: '',
-      memberCity: '',
-    });
+    setAddMemberData(initialAddMemberData);
   };
+
+  const handleEditMember = (memberId) => {
+    console.log('edit member with ID:', memberId);
+  }
+
+  const handleDeletetMember = (memberId) => {
+    console.log('delete member with ID:', memberId);
+  }
 
   const validateForm = () => {
     const result = !!addMemberData.memberName && !!addMemberData.memberSurname && !!addMemberData.memberAge && !!addMemberData.memberCity;
@@ -68,7 +73,7 @@ function App() {
 
   return (
     <div className='App'>
-      <form className='App__form' onSubmit={handleAddMemberSubmit}>
+      <form className='App__form'>
         <InputField
           name='memberName'
           placeholder='Name'
@@ -95,9 +100,10 @@ function App() {
         />
         <Button
           buttonType='submit'
-          buttonClass='App__button'
+          buttonClass='btn'
           buttonText='Add'
           buttonDisabled={!formisValid}
+          onClick={handleAddMemberSubmit}
         />
       </form>
       <table className='App__table'>
@@ -107,11 +113,12 @@ function App() {
             <th>Surname</th>
             <th>Age</th>
             <th>City</th>
+            <th></th>
           </tr>
         </thead>
         <tbody className='App__tbody'>
           {members.map((member) => (
-            <TableRow member={member} key={member.id}/>
+            <TableRow member={member} key={member.id} editHandle={() =>handleEditMember(member.id)} deleteHandle={() => handleDeletetMember(member.id)} />
           ))}
         </tbody>
       </table>

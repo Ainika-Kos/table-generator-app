@@ -1,9 +1,11 @@
 $formButtonBcg: #1493FE
 $formButtonBcgDisabled: #C2CBD1
 $formButtonColor: #ffffff
+$formButtonColorEdit: #057AE3
+$formButtonColorDelete: #B0263D
 $formButtonRadius: 4px
 
-.App__button
+.btn
   width: 100%
   display: flex
   justify-content: center
@@ -22,6 +24,21 @@ $formButtonRadius: 4px
 
   &:hover
     opacity: 0.8
+
   &:disabled
     background-color: $formButtonBcgDisabled
     cursor: not-allowed
+
+  &--small
+    width: auto
+    background-color: transparent
+    padding: 0
+    text-decoration: underline
+    text-transform: none
+    font-weight: normal
+  
+  &--edit
+    color: $formButtonColorEdit
+
+  &--delete
+    color: $formButtonColorDelete

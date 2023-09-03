@@ -1,7 +1,7 @@
 $formBodyBcg: #ffffff
 $formBorderRadius: 4px
 $tableHeadBcg: #0A508B
-$tableHeadColor: #ffffff
+$tableHeadColor: rgba(255, 255, 255, 0.5)
 $tableBodyBcg: #ffffff
 $tableBodyBorder: #EBEBEB
 
@@ -41,11 +41,14 @@ $tableBodyBorder: #EBEBEB
     
     td
       border: solid 1px $tableBodyBorder
+      &.wide
+        display: flex
+        justify-content: space-around
+        min-width: 120px
 
   &__thead
     background-color: $tableHeadBcg
     color: $tableHeadColor
-    opacity: 0.5
 
   &__tbody
     background-color: $tableBodyBcg
