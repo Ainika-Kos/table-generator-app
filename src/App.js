@@ -1,61 +1,97 @@
 import './App.sass';
 import { useState } from 'react';
-
-const membersData = [
-  {
-    'id': 1,
-    'name': 'Nanana',
-    'surname': 'Lalala',
-    'age': 28,
-    'city': 'Carnikava'
-  },
-  {
-    'id': 2,
-    'name': 'Hello',
-    'surname': 'Sunshine',
-    'age': 36,
-    'city': 'Gauja'
-  }
-];
+import { v4 as uuid } from 'uuid';
 
 function App() {
 
-  const [members, setMembers] = useState(membersData);
+  const [members, setMembers] = useState([]);
+  const [addMemberData, setAddMemberData] = useState({
+    id: '',
+    memberName: '',
+    memberSurname: '',
+    memberAge: '',
+    memberCity: ''
+  });
+
+  const handleAddMemberChange = (e) => {
+    e.preventDefault();
+
+    const { name, value } = e.target;
+
+    setAddMemberData({ ...addMemberData, [name]: value });
+
+  };
+
+  const handleAddMemberSubmit = (e) => {
+    e.preventDefault();
+
+    const newMemberId = uuid();
+
+    const newMember = {
+      id: newMemberId,
+      memberName: addMemberData.memberName,
+      memberSurname: addMemberData.memberSurname,
+      memberAge: addMemberData.memberAge,
+      memberCity: addMemberData.memberCity
+    };
+
+    handleAddMember(newMember);
+  };
+
+  const handleAddMember = (newMember) => {
+    const newMembers = [...members, newMember];
+    setMembers(newMembers);
+    setAddMemberData({
+      id: '',
+      memberName: '',
+      memberSurname: '',
+      memberAge: '',
+      memberCity: '',
+    });
+  };
 
   return (
     <div className='App'>
-      <form className='App__form'>
+      <form className='App__form' onSubmit={handleAddMemberSubmit}>
         <input
           type='text'
-          name='fullName'
+          name='memberName'
           required='required'
           placeholder='Name'
           onFocus={(e) => e.target.placeholder = ''}
           onBlur={(e) => e.target.placeholder = 'Name'}
+          onChange={handleAddMemberChange}
+          value={addMemberData.memberName}
         />
         <input
           type='text'
-          name='fullSurName'
+          name='memberSurname'
           required='required'
           placeholder='Surname'
           onFocus={(e) => e.target.placeholder = ''}
           onBlur={(e) => e.target.placeholder = 'Surname'}
+          onChange={handleAddMemberChange}
+          value={addMemberData.memberSurname}
         />
         <input
-          type='number'
-          name='age'
+          type='text'
+          name='memberAge'
           required='required'
           placeholder='Age'
           onFocus={(e) => e.target.placeholder = ''}
           onBlur={(e) => e.target.placeholder = 'Age'}
+          onChange={handleAddMemberChange}
+          value={addMemberData.memberAge}
         />
         <input
           type='text'
-          name='city'
+          name='memberCity'
           required='required'
           placeholder='City'
           onFocus={(e) => e.target.placeholder = ''}
           onBlur={(e) => e.target.placeholder = 'City'}
+          onChange={handleAddMemberChange}
+          value={addMemberData.memberCity}
         />
         <button type='submit' className='App__form__button'>Add</button>
       </form>
@@ -69,12 +105,12 @@ function App() {
           </tr>
         </thead>
         <tbody className='App__tbody'>
-          {members.map(({name, surname, age, city}) => (
-            <tr>
-              <td>{name}</td>
-              <td>{surname}</td>
-              <td>{age}</td>
-              <td>{city}</td>
+          {members.map(({id, memberName, memberSurname, memberAge, memberCity}) => (
+            <tr key={id}>
+              <td>{memberName}</td>
+              <td>{memberSurname}</td>
+              <td>{memberAge}</td>
+              <td>{memberCity}</td>
             </tr>
           ))}
         </tbody>
