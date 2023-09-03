@@ -1,5 +1,5 @@
 import './App.sass';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
 import TableRow from './TableRow/TableRow';
 import InputField from './InputField/InputField';
@@ -9,6 +9,7 @@ import Button from './Button/Button';
 function App() {
 
   const [members, setMembers] = useState([]);
+  const [formisValid, setFormIsValid] = useState(false);
   const [addMemberData, setAddMemberData] = useState({
     id: '',
     memberName: '',
@@ -16,6 +17,12 @@ function App() {
     memberAge: '',
     memberCity: ''
   });
+
+  useEffect(() => {
+    const isValidForm = validateForm();
+    setFormIsValid(isValidForm);
+
+  }, [addMemberData]);
 
   const handleAddMemberChange = (e) => {
     e.preventDefault();
@@ -54,6 +61,11 @@ function App() {
     });
   };
 
+  const validateForm = () => {
+    const result = !!addMemberData.memberName && !!addMemberData.memberSurname && !!addMemberData.memberAge && !!addMemberData.memberCity;
+    return result;
+  };
+
   return (
     <div className='App'>
       <form className='App__form' onSubmit={handleAddMemberSubmit}>
@@ -85,6 +97,7 @@ function App() {
           buttonType='submit'
           buttonClass='App__button'
           buttonText='Add'
+          buttonDisabled={!formisValid}
         />
       </form>
       <table className='App__table'>
