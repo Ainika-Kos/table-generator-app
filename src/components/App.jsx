@@ -1,10 +1,10 @@
 import './App.sass';
 import { useState, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
-import TableRow from './TableRow/TableRow';
+import Button from './Button/Button';
 import InputField from './InputField/InputField';
 import SelectField from './SelectField/SelectField';
-import Button from './Button/Button';
+import TableRow from './TableRow/TableRow';
 
 
 const initialAddMemberData = {
@@ -63,7 +63,10 @@ function App() {
   }
 
   const handleDeletetMember = (memberId) => {
-    console.log('delete member with ID:', memberId);
+    const newMembers = [...members];
+    const index = members.findIndex((member) => member.id === memberId);
+    newMembers.splice(index, 1);
+    setMembers(newMembers);
   }
 
   const validateForm = () => {
