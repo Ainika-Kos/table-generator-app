@@ -1,9 +1,10 @@
 import './App.sass';
 import { useState } from 'react';
 import { v4 as uuid } from 'uuid';
-import TableRow from './TableRow';
-import InputField from './InputField';
-import SelectField from './SelectField';
+import TableRow from './TableRow/TableRow';
+import InputField from './InputField/InputField';
+import SelectField from './SelectField/SelectField';
+import Button from './Button/Button';
 
 function App() {
 
@@ -80,7 +81,11 @@ function App() {
           onChange={handleAddMemberChange}
           value={addMemberData.memberCity}
         />
-        <button type='submit' className='App__form__button'>Add</button>
+        <Button
+          buttonType='submit'
+          buttonClass='App__button'
+          buttonText='Add'
+        />
       </form>
       <table className='App__table'>
         <thead className='App__thead'>
