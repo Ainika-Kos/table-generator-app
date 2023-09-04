@@ -4,7 +4,7 @@ import { v4 as uuid } from 'uuid';
 import Button from './Button/Button';
 import InputField from './InputField/InputField';
 import SelectField from './SelectField/SelectField';
-import TableRow from './TableRow/TableRow';
+import Table from './Table/Table';
 
 
 const initialAddMemberData = {
@@ -22,6 +22,11 @@ function App() {
   const [addMemberData, setAddMemberData] = useState(initialAddMemberData);
 
   useEffect(() => {
+    const validateForm = () => {
+      const result = !!addMemberData.memberName && !!addMemberData.memberSurname && !!addMemberData.memberAge && !!addMemberData.memberCity;
+      return result;
+    };
+
     const isValidForm = validateForm();
     setFormIsValid(isValidForm);
 
@@ -69,11 +74,6 @@ function App() {
     setMembers(newMembers);
   }
 
-  const validateForm = () => {
-    const result = !!addMemberData.memberName && !!addMemberData.memberSurname && !!addMemberData.memberAge && !!addMemberData.memberCity;
-    return result;
-  };
-
   return (
     <div className='App'>
       <form className='App__form'>
@@ -109,22 +109,11 @@ function App() {
           onClick={handleAddMemberSubmit}
         />
       </form>
-      <table className='App__table'>
-        <thead className='App__thead'>
-          <tr>
-            <th>Name</th>
-            <th>Surname</th>
-            <th>Age</th>
-            <th>City</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody className='App__tbody'>
-          {members.map((member) => (
-            <TableRow member={member} key={member.id} editHandle={() =>handleEditMember(member.id)} deleteHandle={() => handleDeletetMember(member.id)} />
-          ))}
-        </tbody>
-      </table>
+      <Table
+        members={members}
+        handleEditMember={handleEditMember}
+        handleDeletetMember={handleDeletetMember}
+      />
     </div>
   );
 }
