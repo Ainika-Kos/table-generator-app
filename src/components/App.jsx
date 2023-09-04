@@ -1,9 +1,7 @@
 import './App.sass';
 import { useState, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
-import Button from './Button/Button';
-import InputField from './InputField/InputField';
-import SelectField from './SelectField/SelectField';
+import Form from './Form/Form';
 import Table from './Table/Table';
 
 
@@ -76,39 +74,12 @@ function App() {
 
   return (
     <div className='App'>
-      <form className='App__form'>
-        <InputField
-          name='memberName'
-          placeholder='Name'
-          onChange={handleAddMemberChange}
-          value={addMemberData.memberName}
-        />
-        <InputField
-          name='memberSurname'
-          placeholder='Surname'
-          onChange={handleAddMemberChange}
-          value={addMemberData.memberSurname}
-        />
-        <InputField
-          name='memberAge'
-          placeholder='Age'
-          onChange={handleAddMemberChange}
-          value={addMemberData.memberAge}
-        />
-        <SelectField
-          name='memberCity'
-          placeholder='City'
-          onChange={handleAddMemberChange}
-          value={addMemberData.memberCity}
-        />
-        <Button
-          buttonType='submit'
-          buttonClass='btn'
-          buttonText='Add'
-          buttonDisabled={!formisValid}
-          onClick={handleAddMemberSubmit}
-        />
-      </form>
+      <Form
+        addMemberData={addMemberData}
+        handleAddMemberChange={handleAddMemberChange}
+        formisValid={formisValid}
+        handleAddMemberSubmit={handleAddMemberSubmit}
+      />
       <Table
         members={members}
         handleEditMember={handleEditMember}
