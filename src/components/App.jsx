@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
 import Form from './Form/Form';
 import Table from './Table/Table';
+import Modal from './Modal/Modal';
 
 
 const initialAddMemberData = {
@@ -18,6 +19,7 @@ function App() {
   const [members, setMembers] = useState([]);
   const [formisValid, setFormIsValid] = useState(false);
   const [addMemberData, setAddMemberData] = useState(initialAddMemberData);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   useEffect(() => {
     const validateForm = () => {
@@ -62,7 +64,7 @@ function App() {
   };
 
   const handleEditMember = (memberId) => {
-    console.log('edit member with ID:', memberId);
+    setModalIsOpen(true);
   }
 
   const handleDeletetMember = (memberId) => {
@@ -85,6 +87,15 @@ function App() {
         handleEditMember={handleEditMember}
         handleDeletetMember={handleDeletetMember}
       />
+      {modalIsOpen &&
+        <Modal
+          addMemberData={addMemberData}
+          handleAddMemberChange={handleAddMemberChange}
+          formisValid={formisValid}
+          handleAddMemberSubmit={handleAddMemberSubmit}
+          handleCloseModal={() => setModalIsOpen(false)}
+        />
+      }
     </div>
   );
 }
