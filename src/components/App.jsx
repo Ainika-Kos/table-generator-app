@@ -1,10 +1,9 @@
 import './App.sass';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import Form from './Form/Form';
 import Table from './Table/Table';
 import Modal from './Modal/Modal';
-
 
 const initialAddMemberData = {
   id: '',
@@ -17,20 +16,9 @@ const initialAddMemberData = {
 function App() {
 
   const [members, setMembers] = useState([]);
-  const [formisValid, setFormIsValid] = useState(false);
   const [addMemberData, setAddMemberData] = useState(initialAddMemberData);
+  const [existingMemberData, setExistingMemberData] = useState(initialAddMemberData);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-
-  useEffect(() => {
-    const validateForm = () => {
-      const result = !!addMemberData.memberName && !!addMemberData.memberSurname && !!addMemberData.memberAge && !!addMemberData.memberCity;
-      return result;
-    };
-
-    const isValidForm = validateForm();
-    setFormIsValid(isValidForm);
-
-  }, [addMemberData]);
 
   const handleAddMemberChange = (e) => {
     e.preventDefault();
@@ -65,6 +53,18 @@ function App() {
 
   const handleEditMember = (memberId) => {
     setModalIsOpen(true);
+    const index = members.findIndex((member) => member.id === memberId);
+    const existingMember = members[index];
+
+    const existingMemberData = {
+      id: memberId,
+      memberName: existingMember.memberName,
+      memberSurname: existingMember.memberSurname,
+      memberAge: existingMember.memberAge,
+      memberCity: existingMember.memberCity
+    };
+
+    setExistingMemberData(existingMemberData);
   }
 
   const handleDeletetMember = (memberId) => {
@@ -79,7 +79,6 @@ function App() {
       <Form
         addMemberData={addMemberData}
         handleAddMemberChange={handleAddMemberChange}
-        formisValid={formisValid}
         handleAddMemberSubmit={handleAddMemberSubmit}
       />
       <Table
@@ -89,9 +88,8 @@ function App() {
       />
       {modalIsOpen &&
         <Modal
-          addMemberData={addMemberData}
+          existingMemberData={existingMemberData}
           handleAddMemberChange={handleAddMemberChange}
-          formisValid={formisValid}
           handleAddMemberSubmit={handleAddMemberSubmit}
           handleCloseModal={() => setModalIsOpen(false)}
         />

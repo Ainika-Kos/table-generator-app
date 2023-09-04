@@ -1,9 +1,24 @@
 import './Form.sass';
+import { useState, useEffect } from 'react';
 import InputField from '../InputField/InputField';
 import SelectField from '../SelectField/SelectField';
 import Button from '../Button/Button';
 
-const Form = ({ addMemberData, handleAddMemberChange, formisValid, handleAddMemberSubmit }) => {
+const Form = ({ addMemberData, handleAddMemberChange, handleAddMemberSubmit }) => {
+
+  const [formisValid, setFormIsValid] = useState(false);
+
+  useEffect(() => {
+    const validateForm = () => {
+      const result = !!addMemberData.memberName && !!addMemberData.memberSurname && !!addMemberData.memberAge && !!addMemberData.memberCity;
+      return result;
+    };
+
+    const isValidForm = validateForm();
+    setFormIsValid(isValidForm);
+
+  }, [addMemberData]);
+
   return (
     <form className='App__form'>
       <InputField
