@@ -17,7 +17,8 @@ function App() {
 
   const [members, setMembers] = useState([]);
   const [addMemberData, setAddMemberData] = useState(initialAddMemberData);
-  const [existingMemberData, setExistingMemberData] = useState(initialAddMemberData);
+  const [isEditMember, setIsEditMember] = useState(false);
+  const [changedMemberData, setChangedMemberData] = useState(initialAddMemberData);
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const handleAddMemberChange = (e) => {
@@ -25,7 +26,11 @@ function App() {
 
     const { name, value } = e.target;
 
-    setAddMemberData({ ...addMemberData, [name]: value });
+    if (isEditMember) {
+      setChangedMemberData({ ...changedMemberData, [name]: value })
+    } else {
+      setAddMemberData({ ...addMemberData, [name]: value })
+    }
 
   };
 
@@ -45,27 +50,40 @@ function App() {
     handleAddMember(newMember);
   };
 
+  
   const handleAddMember = (newMember) => {
     const newMembers = [...members, newMember];
     setMembers(newMembers);
     setAddMemberData(initialAddMemberData);
   };
 
-  const handleEditMember = (memberId) => {
+  
+  const handleOpenModalForm = (memberId) => {
     setModalIsOpen(true);
     const index = members.findIndex((member) => member.id === memberId);
-    const existingMember = members[index];
-
-    const existingMemberData = {
-      id: memberId,
-      memberName: existingMember.memberName,
-      memberSurname: existingMember.memberSurname,
-      memberAge: existingMember.memberAge,
-      memberCity: existingMember.memberCity
-    };
-
-    setExistingMemberData(existingMemberData);
+    const memberToEdit = members[index];
+    setIsEditMember(true);
+    setChangedMemberData(memberToEdit);
+    console.log(changedMemberData);
   }
+
+
+  const handleEditMemberSubmit = (e) => {
+    e.preventDefault();
+
+    const newMembers = [...members];
+    const editedMemberId = changedMemberData.id;
+    const index = members.findIndex((member) => member.id === editedMemberId);
+    const editedMember = newMembers[index];
+    editedMember.memberName = changedMemberData.memberName;
+    editedMember.memberSurname = changedMemberData.memberSurname;
+    editedMember.memberAge = changedMemberData.memberAge;
+    editedMember.memberCity = changedMemberData.memberCity;
+    setMembers(newMembers);
+    setModalIsOpen(false);
+    setIsEditMember(false);
+    setChangedMemberData(initialAddMemberData);
+  };
 
   const handleDeletetMember = (memberId) => {
     const newMembers = [...members];
@@ -83,14 +101,14 @@ function App() {
       />
       <Table
         members={members}
-        handleEditMember={handleEditMember}
+        handleEditMember={handleOpenModalForm}
         handleDeletetMember={handleDeletetMember}
       />
       {modalIsOpen &&
         <Modal
-          existingMemberData={existingMemberData}
+        existingMemberData={changedMemberData}
           handleAddMemberChange={handleAddMemberChange}
-          handleAddMemberSubmit={handleAddMemberSubmit}
+          handleEditMemberSubmit={handleEditMemberSubmit}
           handleCloseModal={() => setModalIsOpen(false)}
         />
       }

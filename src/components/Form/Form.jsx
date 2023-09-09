@@ -4,7 +4,7 @@ import InputField from '../InputField/InputField';
 import SelectField from '../SelectField/SelectField';
 import Button from '../Button/Button';
 
-const Form = ({ addMemberData, handleAddMemberChange, handleAddMemberSubmit }) => {
+const Form = ({ addMemberData, handleAddMemberChange, handleAddMemberSubmit, buttonDisabled }) => {
 
   const [formisValid, setFormIsValid] = useState(false);
 

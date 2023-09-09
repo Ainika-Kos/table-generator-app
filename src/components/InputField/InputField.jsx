@@ -1,6 +1,6 @@
 import './InputField.sass';
 
-const InputField = ({ name, placeholder, value, onChange }) => {
+const InputField = ({ name, placeholder, value, onChange}) => {
     return (
         <input
             type='text'
