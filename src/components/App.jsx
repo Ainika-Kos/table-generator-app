@@ -102,6 +102,8 @@ function App() {
         addMemberData={addMemberData}
         handleAddMemberChange={handleAddMemberChange}
         handleAddMemberSubmit={handleAddMemberSubmit}
+        isControlledInput={true}
+        buttonText='Add'
       />
       <Table
         members={members}

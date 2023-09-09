@@ -4,7 +4,7 @@ import InputField from '../InputField/InputField';
 import SelectField from '../SelectField/SelectField';
 import Button from '../Button/Button';
 
-const Form = ({ addMemberData, handleAddMemberChange, handleAddMemberSubmit, buttonDisabled }) => {
+const Form = ({ addMemberData, handleAddMemberChange, handleAddMemberSubmit, isControlledInput, buttonText }) => {
 
   const [formisValid, setFormIsValid] = useState(false);
 
@@ -26,33 +26,33 @@ const Form = ({ addMemberData, handleAddMemberChange, handleAddMemberSubmit, but
         placeholder='Name'
         onChange={handleAddMemberChange}
         value={addMemberData.memberName}
-        isControlledInput={true}
+        isControlledInput={isControlledInput}
       />
       <InputField
         name='memberSurname'
         placeholder='Surname'
         onChange={handleAddMemberChange}
         value={addMemberData.memberSurname}
-        isControlledInput={true}
+        isControlledInput={isControlledInput}
       />
       <InputField
         name='memberAge'
         placeholder='Age'
         onChange={handleAddMemberChange}
         value={addMemberData.memberAge}
-        isControlledInput={true}
+        isControlledInput={isControlledInput}
       />
       <SelectField
         name='memberCity'
         placeholder='City'
         onChange={handleAddMemberChange}
         value={addMemberData.memberCity}
-        isControlledInput={true}
+        isControlledInput={isControlledInput}
       />
       <Button
         buttonType='submit'
         buttonClass='btn'
-        buttonText='Add'
+        buttonText={buttonText}
         buttonDisabled={!formisValid}
         onClick={handleAddMemberSubmit}
       />
