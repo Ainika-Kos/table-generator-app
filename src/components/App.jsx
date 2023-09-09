@@ -49,7 +49,6 @@ function App() {
 
     handleAddMember(newMember);
   };
-
   
   const handleAddMember = (newMember) => {
     const newMembers = [...members, newMember];
@@ -57,7 +56,6 @@ function App() {
     setAddMemberData(initialAddMemberData);
   };
 
-  
   const handleOpenModalForm = (memberId) => {
     setModalIsOpen(true);
     const index = members.findIndex((member) => member.id === memberId);
@@ -71,23 +69,34 @@ function App() {
     setIsEditMember(false);
   }
 
-
   const handleEditMemberSubmit = (e) => {
     e.preventDefault();
 
     const newMembers = [...members];
+
     const editedMemberId = changedMemberData.id;
     const index = members.findIndex((member) => member.id === editedMemberId);
-    const editedMember = newMembers[index];
-    editedMember.memberName = changedMemberData.memberName;
-    editedMember.memberSurname = changedMemberData.memberSurname;
-    editedMember.memberAge = changedMemberData.memberAge;
-    editedMember.memberCity = changedMemberData.memberCity;
-    setMembers(newMembers);
+
+    if (index !== -1) {
+      
+      newMembers[index] = {
+        ...newMembers[index],
+        memberName: changedMemberData.memberName,
+        memberSurname: changedMemberData.memberSurname,
+        memberAge: changedMemberData.memberAge,
+        memberCity: changedMemberData.memberCity,
+      };
+
+      setMembers(newMembers);
+      handleResetModalForm();
+    }
+  };
+
+  const handleResetModalForm = () => {
     setModalIsOpen(false);
     setIsEditMember(false);
     setChangedMemberData(initialAddMemberData);
-  };
+  }
 
   const handleDeletetMember = (memberId) => {
     const newMembers = [...members];
