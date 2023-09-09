@@ -64,7 +64,11 @@ function App() {
     const memberToEdit = members[index];
     setIsEditMember(true);
     setChangedMemberData(memberToEdit);
-    console.log(changedMemberData);
+  }
+
+  const handleCloseModalForm = () => {
+    setModalIsOpen(false);
+    setIsEditMember(false);
   }
 
 
@@ -106,10 +110,10 @@ function App() {
       />
       {modalIsOpen &&
         <Modal
-        existingMemberData={changedMemberData}
+          existingMemberData={changedMemberData}
           handleAddMemberChange={handleAddMemberChange}
           handleEditMemberSubmit={handleEditMemberSubmit}
-          handleCloseModal={() => setModalIsOpen(false)}
+          handleCloseModal={handleCloseModalForm}
         />
       }
     </div>

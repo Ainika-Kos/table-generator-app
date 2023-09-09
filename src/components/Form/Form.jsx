@@ -26,24 +26,28 @@ const Form = ({ addMemberData, handleAddMemberChange, handleAddMemberSubmit, but
         placeholder='Name'
         onChange={handleAddMemberChange}
         value={addMemberData.memberName}
+        isControlledInput={true}
       />
       <InputField
         name='memberSurname'
         placeholder='Surname'
         onChange={handleAddMemberChange}
         value={addMemberData.memberSurname}
+        isControlledInput={true}
       />
       <InputField
         name='memberAge'
         placeholder='Age'
         onChange={handleAddMemberChange}
         value={addMemberData.memberAge}
+        isControlledInput={true}
       />
       <SelectField
         name='memberCity'
         placeholder='City'
         onChange={handleAddMemberChange}
         value={addMemberData.memberCity}
+        isControlledInput={true}
       />
       <Button
         buttonType='submit'

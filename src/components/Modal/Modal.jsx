@@ -1,7 +1,8 @@
 import './Modal.sass';
 import { useState, useEffect } from 'react';
-import cities from '../../data/cities';
 import Button from '../Button/Button';
+import InputField from '../InputField/InputField';
+import SelectField from '../SelectField/SelectField';
 
 const Modal = ({ existingMemberData, handleAddMemberChange, handleEditMemberSubmit, handleCloseModal }) => {
 
@@ -24,40 +25,34 @@ const Modal = ({ existingMemberData, handleAddMemberChange, handleEditMemberSubm
       onClick={(e) => { if (e.target.className === 'App__modal-container') handleCloseModal()}}
     >
       <form className='App__form'>
-        <input
+        <InputField
           name='memberName'
           placeholder='Name'
           onChange={handleAddMemberChange}
-          defaultValue={existingMemberData.memberName}
+          value={existingMemberData.memberName}
+          isControlledInput={false}
         />
-        <input
+        <InputField
           name='memberSurname'
           placeholder='Surname'
           onChange={handleAddMemberChange}
-          defaultValue={existingMemberData.memberSurname}
+          value={existingMemberData.memberSurname}
+          isControlledInput={false}
         />
-        <input
+        <InputField
           name='memberAge'
           placeholder='Age'
           onChange={handleAddMemberChange}
-          defaultValue={existingMemberData.memberAge}
+          value={existingMemberData.memberAge}
+          isControlledInput={false}
         />
-        <select
+        <SelectField
           name='memberCity'
+          placeholder='City'
           onChange={handleAddMemberChange}
-          defaultValue={existingMemberData.memberCity}
-          required='required'
-        >
-          <option value="">City</option>
-          {cities.map((city) => (
-            <option
-              key={city.id}
-              value={city.cityName}
-            >
-              {city.cityName}
-            </option>
-          ))}
-        </select>
+          value={existingMemberData.memberCity}
+          isControlledInput={false}
+        />
         <Button
           buttonType='submit'
           buttonClass='btn'

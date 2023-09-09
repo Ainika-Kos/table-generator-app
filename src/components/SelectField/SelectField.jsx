@@ -1,12 +1,12 @@
 import cities from '../../data/cities';
 
-const SelectField = ({name, onChange, value}) => {
+const SelectField = ({name, onChange, value, isControlledInput}) => {
   return (
     <select
       name={name}
       onChange={onChange}
-      value={value}
       required='required'
+      {...(isControlledInput ? { value } : { defaultValue: value })}
     >
       <option value="">City</option>
       {cities.map((city) => (

@@ -1,6 +1,6 @@
 import './InputField.sass';
 
-const InputField = ({ name, placeholder, value, onChange}) => {
+const InputField = ({ name, placeholder, value, onChange, isControlledInput}) => {
     return (
         <input
             type='text'
@@ -10,7 +10,7 @@ const InputField = ({ name, placeholder, value, onChange}) => {
             onFocus={(e) => e.target.placeholder = ''}
             onBlur={(e) => e.target.placeholder = placeholder}
             onChange={onChange}
-            value={value}
+            {...(isControlledInput ? { value } : { defaultValue: value })}
         />
     );
 };
