@@ -2,7 +2,7 @@ import './SelectField.sass';
 import { useState, useEffect } from 'react';
 import cities from '../../data/cities';
 
-const SelectField = ({ name, onChange, value, isControlledInput }) => {
+const SelectField = ({ name, onChange, value, isControlledInput, errorStyle }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState(value);
 
@@ -26,7 +26,7 @@ const SelectField = ({ name, onChange, value, isControlledInput }) => {
   };
 
   return (
-    <div className={`App__custom-select ${isOpen ? 'open' : ''}`}>
+    <div className={`App__custom-select ${isOpen ? 'open' : ''} ${errorStyle}`}>
       <div className={`App__selected-option ${selectedValue? 'selected' : ''}`} onClick={() => setIsOpen(!isOpen)}>
         {selectedValue || 'City'}
         <span className={`App__custom-select__arrow ${isOpen ? 'opened' : ''}`}>

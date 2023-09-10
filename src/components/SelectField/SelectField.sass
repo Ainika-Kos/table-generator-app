@@ -1,6 +1,7 @@
 $formInputBorderRadius: 4px
 $formInputBorder: #E6ECEF
 $formInputColor: #868A8D
+$formInputBorderError: #CC0000
 $formInputColorActive: #212229
 
 .App
@@ -13,6 +14,9 @@ $formInputColorActive: #212229
     color: $formInputColor
     outline: none
     z-index: 3
+
+    &.error
+      border: 1px solid $formInputBorderError
 
     &__arrow
       position: absolute

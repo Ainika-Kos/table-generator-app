@@ -53,6 +53,7 @@ const Form = ({ addMemberData, handleAddMemberChange, handleAddMemberSubmit, isC
         onChange={handleAddMemberChange}
         value={addMemberData.memberName}
         isControlledInput={isControlledInput}
+        errorStyle={errors.name? 'error': ''}
       />
       <InputField
         name='memberSurname'
@@ -61,6 +62,7 @@ const Form = ({ addMemberData, handleAddMemberChange, handleAddMemberSubmit, isC
         onChange={handleAddMemberChange}
         value={addMemberData.memberSurname}
         isControlledInput={isControlledInput}
+        errorStyle={errors.surname ? 'error' : ''}
       />
       <InputField
         name='memberAge'
@@ -69,6 +71,7 @@ const Form = ({ addMemberData, handleAddMemberChange, handleAddMemberSubmit, isC
         onChange={handleAddMemberChange}
         value={addMemberData.memberAge}
         isControlledInput={isControlledInput}
+        errorStyle={errors.age ? 'error' : ''}
       />
       <SelectField
         name='memberCity'
@@ -76,6 +79,7 @@ const Form = ({ addMemberData, handleAddMemberChange, handleAddMemberSubmit, isC
         onChange={handleAddMemberChange}
         value={addMemberData.memberCity}
         isControlledInput={isControlledInput}
+        errorStyle={errors.city ? 'error' : ''}
       />
       {Object.keys(errors).length > 0 && (
         <div className='App__form__error-wrapper'>

@@ -1,6 +1,7 @@
 $formInputBorderRadius: 4px
 $formInputBorder: #E6ECEF
 $formInputBorderFocus: #1493FE
+$formInputBorderError: #CC0000
 $formInputColor: #000000
 $formInputPlaceholderColor: #868A8D
 
@@ -19,3 +20,6 @@ $formInputPlaceholderColor: #868A8D
 
     &::-webkit-input-placeholder
       color: $formInputPlaceholderColor
+
+    &.error
+      border: 1px solid $formInputBorderError
