@@ -1,9 +1,9 @@
 import './InputField.sass';
 
-const InputField = ({ name, placeholder, value, onChange, isControlledInput}) => {
+const InputField = ({ name, type, placeholder, value, onChange, isControlledInput}) => {
     return (
         <input
-            type='text'
+            type={type}
             name={name}
             required='required'
             placeholder={placeholder}

@@ -38,7 +38,7 @@ const SelectField = ({ name, onChange, value, isControlledInput }) => {
         </span>
       </div>
       <ul className="App__options">
-        <li onClick={() => handleSelect('')} key="">
+        <li onClick={() => handleSelect('City')} key="">
           City
         </li>
         {cities.map(({id, cityName}) => (
