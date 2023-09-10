@@ -1,5 +1,5 @@
 $switchBackgroundColor: #C2CBD1
-$switchBackgroundColorActive: #0A508B
+$switchBackgroundColorActive: #1493FE
 $switchBoxShadow: rgba(0,0,0,.05)
 $switchBorderRadius: 18px
 $switchToggleBcg: #FFFFFF
@@ -11,12 +11,13 @@ $switchToggleBoxShadow: rgba(0,0,0,.5)
     position: relative
     display: inline-block
     width: 65px
-    height: 30px
+    height: auto
+    min-height: 30px
     border-radius: $switchBorderRadius
     box-shadow: inset 0 0 2px 1px $switchBoxShadow
     margin: 0 15px 0 0
     background-color: $switchBackgroundColor
-    transition: background-color 0.5s ease
+    transition: background-color 0.3s ease
 
     &.active
       background-color: $switchBackgroundColorActive

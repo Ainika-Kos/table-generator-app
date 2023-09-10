@@ -1,5 +1,7 @@
 $tableHeadBcg: #0A508B
+$tableHeadBcgDark: #1493FE
 $tableHeadColor: rgba(255, 255, 255, 0.5)
+$tableHeadColorDark: #FFFFFF
 $tableBodyBcg: #ffffff
 $tableBodyBorder: #EBEBEB
 $layout-breakpoint-mobile-xs: 500px
@@ -33,11 +35,16 @@ $layout-breakpoint-mobile: 768px
 .App__thead
   background-color: $tableHeadBcg
   color: $tableHeadColor
+  transition: background-color 0.3s ease, color 0.3s ease
+
+  .dark-theme &
+    background-color: $tableHeadBcgDark
+    color: $tableHeadColorDark
 
 .App__tbody
   background-color: $tableBodyBcg
   border-collapse: separate
-
+  transition: background-color 0.3s ease
 
 @media (min-width: $layout-breakpoint-mobile-xs)
   .App__table

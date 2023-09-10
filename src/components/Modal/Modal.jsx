@@ -12,7 +12,7 @@ const Modal = ({ existingMemberData, handleAddMemberChange, handleEditMemberSubm
         handleAddMemberChange={handleAddMemberChange}
         handleAddMemberSubmit={handleEditMemberSubmit}
         isControlledInput={false}
-        buttonText='Save'
+        buttonText='Agree'
       />
     </div>
   );
