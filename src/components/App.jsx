@@ -20,6 +20,7 @@ function App() {
   const [isEditMember, setIsEditMember] = useState(false);
   const [changedMemberData, setChangedMemberData] = useState(initialAddMemberData);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
 
   const handleAddMemberChange = (e) => {
     e.preventDefault();
@@ -105,8 +106,17 @@ function App() {
     setMembers(newMembers);
   }
 
+  const toggleTheme = () => {
+    setIsDarkTheme(!isDarkTheme);
+  };
+
   return (
-    <div className='App'>
+    <div className={`App ${isDarkTheme ? 'dark-theme-on' : ''}`}>
+      
+      <div class={`App__switch ${isDarkTheme ? 'active' : ''}`}>
+        <input class="App__switch__check" type="checkbox" data-limits-advanced-switch="" onChange={() => toggleTheme()}/>
+        <span class="App__switch__toggle"></span>
+      </div>
       <Form
         addMemberData={addMemberData}
         handleAddMemberChange={handleAddMemberChange}
