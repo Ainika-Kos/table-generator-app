@@ -117,13 +117,22 @@ function App() {
         isDarkTheme={isDarkTheme}
         onChange={toggleTheme}
       />
-      <Form
-        addMemberData={addMemberData}
-        handleAddMemberChange={handleAddMemberChange}
-        handleAddMemberSubmit={handleAddMemberSubmit}
-        isControlledInput={true}
-        buttonText='Add'
-      />
+      <div className='App__forms-wrapper'>
+        <Form
+          addMemberData={addMemberData}
+          handleAddMemberChange={handleAddMemberChange}
+          handleAddMemberSubmit={handleAddMemberSubmit}
+          isControlledInput={true}
+          buttonText='Add'
+        />
+        <Form
+          addMemberData={addMemberData}
+          handleAddMemberChange={handleAddMemberChange}
+          handleAddMemberSubmit={handleAddMemberSubmit}
+          isControlledInput={true}
+          buttonText='Add'
+        />
+      </div>
       <Table
         members={members}
         handleEditMember={handleOpenModalForm}

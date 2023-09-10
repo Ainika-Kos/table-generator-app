@@ -1,6 +1,7 @@
 $pageBcg: #E5E8ED
 $pageBcgDark: #1C1C1C
 $pageColor: #868A8D
+$layout-breakpoint-mobile-xs: 500px
   
 .App
   width: 100%
@@ -17,3 +18,18 @@ $pageColor: #868A8D
 
   &.dark-theme
     background-color: $pageBcgDark
+
+  &__forms-wrapper
+    position: relative
+    width: 100%
+    max-width: 600px
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    gap: 30px
+    margin: 30px auto
+
+@media (min-width: $layout-breakpoint-mobile-xs)
+  .App__forms-wrapper
+    flex-direction: row
