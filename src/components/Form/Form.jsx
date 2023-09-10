@@ -52,7 +52,6 @@ const Form = ({ addMemberData, handleAddMemberChange, handleAddMemberSubmit, isC
         value={addMemberData.memberName}
         isControlledInput={isControlledInput}
       />
-      {errors.name ? <p className="error"> {errors.name}</p> : null}
       <InputField
         name='memberSurname'
         type='text'
@@ -61,7 +60,6 @@ const Form = ({ addMemberData, handleAddMemberChange, handleAddMemberSubmit, isC
         value={addMemberData.memberSurname}
         isControlledInput={isControlledInput}
       />
-      {errors.surname ? <p className="error"> {errors.surname} </p> : null}
       <InputField
         name='memberAge'
         type='number'
@@ -70,7 +68,6 @@ const Form = ({ addMemberData, handleAddMemberChange, handleAddMemberSubmit, isC
         value={addMemberData.memberAge}
         isControlledInput={isControlledInput}
       />
-      {errors.age ? <p className="error"> {errors.age} </p> : null}
       <SelectField
         name='memberCity'
         placeholder='City'
@@ -78,7 +75,10 @@ const Form = ({ addMemberData, handleAddMemberChange, handleAddMemberSubmit, isC
         value={addMemberData.memberCity}
         isControlledInput={isControlledInput}
       />
-      {errors.city ? <p className="error"> {errors.city}</p> : null}
+        {errors.name ? <p className='App__form__error'> {errors.name}</p> : null}
+        {errors.surname ? <p className='App__form__error'> {errors.surname} </p> : null}
+        {errors.city ? <p className='App__form__error'> {errors.city}</p> : null}
+        {errors.age ? <p className='App__form__error'> {errors.age} </p> : null}
       <Button
         buttonType='submit'
         buttonClass='btn'
