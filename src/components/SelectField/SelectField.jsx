@@ -1,6 +1,6 @@
-import cities from '../../data/cities';
 import './SelectField.sass';
 import { useState, useEffect } from 'react';
+import cities from '../../data/cities';
 
 const SelectField = ({ name, onChange, value, isControlledInput }) => {
   const [isOpen, setIsOpen] = useState(false);

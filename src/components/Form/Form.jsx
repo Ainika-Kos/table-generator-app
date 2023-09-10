@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import InputField from '../InputField/InputField';
 import SelectField from '../SelectField/SelectField';
 import Button from '../Button/Button';
+import ErrorText from '../ErrorText/ErrorText';
 
 const Form = ({ addMemberData, handleAddMemberChange, handleAddMemberSubmit, isControlledInput, buttonText }) => {
 
@@ -15,15 +16,15 @@ const Form = ({ addMemberData, handleAddMemberChange, handleAddMemberSubmit, isC
       let newErrors = {};
 
       if (addMemberData.memberName && addMemberData.memberName.length < 2) {
-        newErrors = { ...newErrors, name : 'Name should be at least 2 characters long'};
+        newErrors = { ...newErrors, name: 'Please enter a name with at least 2 characters'};
       }
       
       if (addMemberData.memberSurname && addMemberData.memberSurname.length < 2) {
-        newErrors = { ...newErrors, surname : 'Surname should be at least 2 characters long'};
+        newErrors = { ...newErrors, surname: 'Please enter a surname with at least 2 characters'};
       }
 
       if (addMemberData.memberAge && addMemberData.memberAge < 1) {
-        newErrors = { ...newErrors, age : 'Minimum age is 1 year'};
+        newErrors = { ...newErrors, age: 'Please enter an age greater than 0 (1 year or older)'};
       }
       
       if (addMemberData.memberCity && addMemberData.memberCity === 'City') {
@@ -75,10 +76,16 @@ const Form = ({ addMemberData, handleAddMemberChange, handleAddMemberSubmit, isC
         value={addMemberData.memberCity}
         isControlledInput={isControlledInput}
       />
-        {errors.name ? <p className='App__form__error'> {errors.name}</p> : null}
-        {errors.surname ? <p className='App__form__error'> {errors.surname} </p> : null}
-        {errors.city ? <p className='App__form__error'> {errors.city}</p> : null}
-        {errors.age ? <p className='App__form__error'> {errors.age} </p> : null}
+      {Object.keys(errors).length > 0 && (
+        <div className='App__form__error-wrapper'>
+          {Object.keys(errors).map((key) => (
+            <ErrorText
+              key={key}
+              errorText={errors[key]}
+            />
+          ))}
+        </div>
+      )}
       <Button
         buttonType='submit'
         buttonClass='btn'
