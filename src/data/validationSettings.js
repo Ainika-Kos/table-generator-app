@@ -1,25 +1,36 @@
 const validationProperties = [
   {
     'errorName' : 'name',
-    'characters' : 2,
-    'errorText': 'Please enter a name with at least 2 characters'
+    'minCharacters' : 2,
+    'maxCharacters' : 15,
+    'minAge': null,
+    'maxAge': null,
+    'errorText': 'Please provide a name that is between 2 and 15 characters in length'
   },
   {
     'errorName': 'surname',
-    'characters': 2,
-    'errorText': 'Please enter a surname with at least 2 characters'
+    'minCharacters': 2,
+    'maxCharacters': 15,
+    'minAge': null,
+    'maxAge': null,
+    'errorText': 'Please provide a surname that is between 2 and 15 characters in length'
   },
   {
     'errorName': 'age',
-    'characters': 1,
-    'errorText': 'Please enter an age greater than 0'
+    'minCharacters': null,
+    'maxCharacters': null,
+    'minAge': 1,
+    'maxAge': 120,
+    'errorText': 'Please provide an age between 1 and 120 years'
   },
   {
     'errorName': 'city',
-    'characters': '',
+    'minCharacters': null,
+    'maxCharacters': null,
+    'minAge': null,
+    'maxAge': null,
     'errorText': 'Please select a city'
   }
 ];
-
 
 export default validationProperties;

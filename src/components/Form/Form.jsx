@@ -16,15 +16,18 @@ const Form = ({ addMemberData, handleAddMemberChange, handleAddMemberSubmit, isC
 
       let newErrors = {};
 
-      if (addMemberData.memberName && addMemberData.memberName.length < validationProperties.find(item => item.errorName === 'name').characters) {
+      if (addMemberData.memberName &&
+        (addMemberData.memberName.length < validationProperties.find(item => item.errorName === 'name').minCharacters || addMemberData.memberName.length > validationProperties.find(item => item.errorName === 'name').maxCharacters)) {
         newErrors = { ...newErrors, name: validationProperties.find(item => item.errorName === 'name').errorText };
       }
       
-      if (addMemberData.memberSurname && addMemberData.memberSurname.length < validationProperties.find(item => item.errorName === 'surname').characters) {
+      if (addMemberData.memberSurname &&
+        (addMemberData.memberSurname.length < validationProperties.find(item => item.errorName === 'surname').minCharacters || addMemberData.memberSurname.length > validationProperties.find(item => item.errorName === 'surname').maxCharacters)) {
         newErrors = { ...newErrors, surname: validationProperties.find(item => item.errorName === 'surname').errorText };
       }
 
-      if (addMemberData.memberAge && addMemberData.memberAge < validationProperties.find(item => item.errorName === 'age').characters) {
+      if (addMemberData.memberAge &&
+        (addMemberData.memberAge < validationProperties.find(item => item.errorName === 'age').minAge || addMemberData.memberAge > validationProperties.find(item => item.errorName === 'age').maxAge)) {
         newErrors = { ...newErrors, age: validationProperties.find(item => item.errorName === 'age').errorText };
       }
       

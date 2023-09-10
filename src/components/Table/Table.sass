@@ -2,17 +2,17 @@ $tableHeadBcg: #0A508B
 $tableHeadColor: rgba(255, 255, 255, 0.5)
 $tableBodyBcg: #ffffff
 $tableBodyBorder: #EBEBEB
-    
+$layout-breakpoint-small: 768px
+
 .App__table
   width: 100%
-  max-width: 600px
+  max-width: 100%
   border-collapse: collapse
   text-align: left
 
   td,
   th
-    padding: 9px 12px
-    gap: 1px
+    padding: 6px
     
   td
     border: solid 1px $tableBodyBorder
@@ -28,3 +28,12 @@ $tableBodyBorder: #EBEBEB
 .App__tbody
   background-color: $tableBodyBcg
   border-collapse: separate
+
+
+@media (min-width: $layout-breakpoint-small)
+  .App__table
+    max-width: 600px
+
+    td,
+    th
+      padding: 9px 12px
