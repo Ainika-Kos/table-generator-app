@@ -5,7 +5,7 @@ const TableRow = ({ member, editHandle, deleteHandle }) => {
     <tr>
       <td>{member.memberName}</td>
       <td>{member.memberSurname}</td>
-      <td>{member.memberAge}</td>
+      <td className='narrow'>{member.memberAge}</td>
       <td>{member.memberCity}</td>
       <td className='wide'>
         <Button

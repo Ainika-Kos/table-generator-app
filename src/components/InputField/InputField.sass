@@ -4,6 +4,7 @@ $formInputBorderFocus: #1493FE
 $formInputBorderError: #CC0000
 $formInputColor: #000000
 $formInputPlaceholderColor: #868A8D
+$layout-breakpoint-mobile-xs: 500px
 
 .App__form
   input
@@ -14,12 +15,21 @@ $formInputPlaceholderColor: #868A8D
     color: $formInputColor
     outline: none
     transition: border 0.3s ease
+    font-size: 8px
 
     &:focus
       border: 1px solid $formInputBorderFocus
 
     &::-webkit-input-placeholder
       color: $formInputPlaceholderColor
+      font-size: 8px
 
     &.error
       border: 1px solid $formInputBorderError
+
+@media (min-width: $layout-breakpoint-mobile-xs)
+  .App__form
+    input
+      font-size: 12px
+      &::-webkit-input-placeholder
+        font-size: 12px

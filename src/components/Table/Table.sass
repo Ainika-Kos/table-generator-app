@@ -2,7 +2,8 @@ $tableHeadBcg: #0A508B
 $tableHeadColor: rgba(255, 255, 255, 0.5)
 $tableBodyBcg: #ffffff
 $tableBodyBorder: #EBEBEB
-$layout-breakpoint-small: 768px
+$layout-breakpoint-mobile-xs: 500px
+$layout-breakpoint-mobile: 768px
 
 .App__table
   width: 100%
@@ -13,13 +14,21 @@ $layout-breakpoint-small: 768px
   td,
   th
     padding: 6px
+    font-size: 8px
     
   td
     border: solid 1px $tableBodyBorder
+    word-break: break-all
+    min-width: 65px
     &.wide
+      border: none
+      border-bottom: solid 1px $tableBodyBorder
       display: flex
       justify-content: space-around
-      min-width: 120px
+      min-width: 75px
+      padding: 6px 3px
+    &.narrow
+      min-width: 30px
 
 .App__thead
   background-color: $tableHeadBcg
@@ -30,10 +39,21 @@ $layout-breakpoint-small: 768px
   border-collapse: separate
 
 
-@media (min-width: $layout-breakpoint-small)
+@media (min-width: $layout-breakpoint-mobile-xs)
+  .App__table
+    td,
+    th
+      font-size: 12px
+
+@media (min-width: $layout-breakpoint-mobile)
   .App__table
     max-width: 600px
 
     td,
     th
       padding: 9px 12px
+      font-size: 12px
+
+    td
+      &.wide
+        min-width: 120px

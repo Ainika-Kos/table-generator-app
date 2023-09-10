@@ -3,6 +3,7 @@ $formInputBorder: #E6ECEF
 $formInputColor: #868A8D
 $formInputBorderError: #CC0000
 $formInputColorActive: #212229
+$layout-breakpoint-mobile-xs: 500px
 
 .App
   &__custom-select
@@ -38,6 +39,7 @@ $formInputColorActive: #212229
     align-items: center
     cursor: pointer
     user-select: none
+    font-size: 8px
     &.selected
       color: $formInputColorActive
 
@@ -72,3 +74,8 @@ $formInputColorActive: #212229
       &:hover
         color: $formInputColorActive
         font-weight: 700
+
+@media (min-width: $layout-breakpoint-mobile-xs)
+  .App
+    &__selected-option
+      font-size: 12px

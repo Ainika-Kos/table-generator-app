@@ -8,7 +8,7 @@ const Table = ({ members, handleEditMember, handleDeletetMember }) => {
         <tr>
           <th>Name</th>
           <th>Surname</th>
-          <th>Age</th>
+          <th className='narrow'>Age</th>
           <th>City</th>
           <th></th>
         </tr>

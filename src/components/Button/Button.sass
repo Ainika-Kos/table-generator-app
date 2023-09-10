@@ -4,6 +4,7 @@ $formButtonColor: #ffffff
 $formButtonColorEdit: #057AE3
 $formButtonColorDelete: #B0263D
 $formButtonRadius: 4px
+$layout-breakpoint-mobile-xs: 500px
 
 .btn
   width: 100%
@@ -21,6 +22,7 @@ $formButtonRadius: 4px
   cursor: pointer
   transition: opacity 0.3s ease
   will-change: opacity
+  font-size: 8px
 
   &:hover
     opacity: 0.8
@@ -31,6 +33,7 @@ $formButtonRadius: 4px
 
   &--small
     width: auto
+    height: 24px
     background-color: transparent
     padding: 0
     text-decoration: underline
@@ -42,3 +45,7 @@ $formButtonRadius: 4px
 
   &--delete
     color: $formButtonColorDelete
+
+@media (min-width: $layout-breakpoint-mobile-xs)
+  .btn
+    font-size: 12px
