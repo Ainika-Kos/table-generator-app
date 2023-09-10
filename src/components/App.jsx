@@ -4,6 +4,7 @@ import { v4 as uuid } from 'uuid';
 import Form from './Form/Form';
 import Table from './Table/Table';
 import Modal from './Modal/Modal';
+import SwitchToggler from './SwitchToggler/SwitchToggler';
 
 const initialAddMemberData = {
   id: '',
@@ -111,12 +112,11 @@ function App() {
   };
 
   return (
-    <div className={`App ${isDarkTheme ? 'dark-theme-on' : ''}`}>
-      
-      <div class={`App__switch ${isDarkTheme ? 'active' : ''}`}>
-        <input class="App__switch__check" type="checkbox" data-limits-advanced-switch="" onChange={() => toggleTheme()}/>
-        <span class="App__switch__toggle"></span>
-      </div>
+    <div className={`App ${isDarkTheme ? 'dark-theme' : ''}`}>
+      <SwitchToggler
+        isDarkTheme={isDarkTheme}
+        onChange={toggleTheme}
+      />
       <Form
         addMemberData={addMemberData}
         handleAddMemberChange={handleAddMemberChange}
