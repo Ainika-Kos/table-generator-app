@@ -1,6 +1,7 @@
 import './App.sass';
 import { useState } from 'react';
 import { v4 as uuid } from 'uuid';
+import Button from './Button/Button';
 import Form from './Form/Form';
 import Table from './Table/Table';
 import Modal from './Modal/Modal';
@@ -17,6 +18,7 @@ const initialAddMemberData = {
 function App() {
 
   const [members, setMembers] = useState([]);
+  const [copiedTables, setCopiedTables] = useState([]);
   const [addMemberData, setAddMemberData] = useState(initialAddMemberData);
   const [isEditMember, setIsEditMember] = useState(false);
   const [changedMemberData, setChangedMemberData] = useState(initialAddMemberData);
@@ -107,6 +109,11 @@ function App() {
     setMembers(newMembers);
   }
 
+  const handleTableCopy = () => {
+    const newCopiedTable = [...members];
+    setCopiedTables([...copiedTables, newCopiedTable]);
+  }
+
   const toggleTheme = () => {
     setIsDarkTheme(!isDarkTheme);
   };
@@ -119,7 +126,7 @@ function App() {
       />
       <div className='App__forms-wrapper'>
         <Form
-          addMemberData={addMemberData}
+          addMemberData={addMemberData} 
           handleAddMemberChange={handleAddMemberChange}
           handleAddMemberSubmit={handleAddMemberSubmit}
           isControlledInput={true}
@@ -133,11 +140,30 @@ function App() {
           buttonText='Add'
         />
       </div>
+      <Button
+        buttonType='button'
+        buttonClass='btn'
+        buttonText='Copy'
+        buttonDisabled={false}
+        onClick={handleTableCopy}
+      />
       <Table
         members={members}
         handleEditMember={handleOpenModalForm}
         handleDeletetMember={handleDeletetMember}
       />
+      {copiedTables.length > 0 && (
+        <div className='App__tables-wrapper'>
+          {copiedTables.map((copiedTableData) => (
+            <Table
+              key={copiedTableData.id}
+              members={copiedTableData}
+              handleEditMember={handleOpenModalForm}
+              handleDeletetMember={handleDeletetMember}
+            />
+          ))}
+        </div>
+      )}
       {modalIsOpen &&
         <Modal
           existingMemberData={changedMemberData}
