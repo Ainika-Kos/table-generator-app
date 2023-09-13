@@ -1,6 +1,7 @@
 $formBodyBcg: #ffffff
 $formBodyShadowColor: rgba(0, 0, 0, 0.15)
 $formBorderRadius: 4px
+$formErrorTextColor: #CC0000
 
 .App__form
   position: relative
@@ -25,3 +26,12 @@ $formBorderRadius: 4px
     justify-content: center
     align-items: center
     margin: 0
+
+  &__error-text
+    display: block
+    width: 100%
+    font-size: 12px
+    font-weight: 700
+    text-align: center
+    color: $formErrorTextColor
+    margin: 5px 0
