@@ -48,7 +48,7 @@ const Form = ({ addMemberData, handleAddMemberChange, handleAddMemberSubmit, isC
   }, [addMemberData]);
 
   return (
-    <form className='App__form'>
+    <form className='App__form' data-testid='form'>
       <InputField
         name='memberName'
         type='text'
@@ -100,6 +100,7 @@ const Form = ({ addMemberData, handleAddMemberChange, handleAddMemberSubmit, isC
         buttonText={buttonText}
         buttonDisabled={!formisValid}
         onClick={handleAddMemberSubmit}
+        testId='btn-submit'
       />
     </form>
   );

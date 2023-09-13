@@ -119,7 +119,7 @@ function App() {
   };
 
   return (
-    <div className={`App ${isDarkTheme ? 'dark-theme' : ''}`}>
+    <div className={`App ${isDarkTheme ? 'dark-theme' : ''}`} data-testid='app'>
       <SwitchToggler
         isDarkTheme={isDarkTheme}
         onChange={toggleTheme}
@@ -146,6 +146,7 @@ function App() {
         buttonText='Copy'
         buttonDisabled={false}
         onClick={handleTableCopy}
+        testId='btn-copy'
       />
       <Table
         members={members}

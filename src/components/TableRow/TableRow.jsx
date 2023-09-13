@@ -14,6 +14,7 @@ const TableRow = ({ member, editHandle, deleteHandle }) => {
           buttonText='Edit'
           buttonDisabled={false}
           onClick={editHandle}
+          testId='btn-edit'
         />
         <Button
           buttonType='button'
@@ -21,6 +22,7 @@ const TableRow = ({ member, editHandle, deleteHandle }) => {
           buttonText='Delete'
           buttonDisabled={false}
           onClick={deleteHandle}
+          testId='btn-delete'
         />
       </td>
     </tr>

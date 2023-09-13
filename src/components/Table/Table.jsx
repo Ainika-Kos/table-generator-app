@@ -3,7 +3,7 @@ import TableRow from '../TableRow/TableRow';
 
 const Table = ({ members, handleEditMember, handleDeletetMember }) => {
   return (
-    <table className='App__table'>
+    <table className='App__table' data-testid='table'>
       <thead className='App__thead'>
         <tr>
           <th>Name</th>
