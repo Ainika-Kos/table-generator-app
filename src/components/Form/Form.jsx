@@ -4,7 +4,6 @@ import validationProperties from '../../data/validationSettings';
 import InputField from '../InputField/InputField';
 import SelectField from '../SelectField/SelectField';
 import Button from '../Button/Button';
-import ErrorText from '../ErrorText/ErrorText';
 
 const Form = ({ addMemberData, handleAddMemberChange, handleAddMemberSubmit, isControlledInput, buttonText }) => {
 
@@ -84,16 +83,11 @@ const Form = ({ addMemberData, handleAddMemberChange, handleAddMemberSubmit, isC
         isControlledInput={isControlledInput}
         errorStyle={errors.city ? 'error' : ''}
       />
-      {Object.keys(errors).length > 0 && (
-        <div className='App__form__error-wrapper'>
-          {Object.keys(errors).map((key) => (
-            <ErrorText
-              key={key}
-              errorText={errors[key]}
-            />
-          ))}
-        </div>
-      )}
+      <div className='App__form__error-wrapper' >
+        {Object.keys(errors).map((key) => (
+          <p className='App__form__error-text' key={key} data-testid='form-error'>{errors[key]}</p>
+        ))}
+      </div>
       <Button
         buttonType='submit'
         buttonClass='btn'

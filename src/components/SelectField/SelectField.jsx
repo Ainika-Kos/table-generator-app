@@ -26,8 +26,8 @@ const SelectField = ({ name, onChange, value, isControlledInput, errorStyle }) =
   };
 
   return (
-    <div className={`App__custom-select ${isOpen ? 'open' : ''} ${errorStyle}`}>
-      <div className={`App__selected-option ${selectedValue? 'selected' : ''}`} onClick={() => setIsOpen(!isOpen)}>
+    <div className={`App__custom-select ${isOpen ? 'open' : ''} ${errorStyle}`} data-testid='memberCity-wrapper'>
+      <div className={`App__selected-option ${selectedValue? 'selected' : ''}`} onClick={() => setIsOpen(!isOpen)} data-testid='memberCity'>
         {selectedValue || 'City'}
         <span className={`App__custom-select__arrow ${isOpen ? 'opened' : ''}`}>
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -12,6 +12,7 @@ const InputField = ({ name, type, placeholder, value, onChange, isControlledInpu
       onChange={onChange}
       {...(isControlledInput ? { value } : { defaultValue: value })}
       className={errorStyle}
+      data-testid={name}
     />
   );
 };
