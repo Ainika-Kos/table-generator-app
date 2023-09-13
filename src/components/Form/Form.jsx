@@ -83,7 +83,7 @@ const Form = ({ addMemberData, handleAddMemberChange, handleAddMemberSubmit, isC
         isControlledInput={isControlledInput}
         errorStyle={errors.city ? 'error' : ''}
       />
-      <div className='App__form__error-wrapper' >
+      <div className='App__form__error-wrapper' data-testid='form-error-wrapper' >
         {Object.keys(errors).map((key) => (
           <p className='App__form__error-text' key={key} data-testid='form-error'>{errors[key]}</p>
         ))}

@@ -107,7 +107,6 @@ describe('Form validation, errors', () => {
         expect(errorMessage).toHaveTextContent(surnameErrorText);
       })
     });
-    
   });
 
   test('Validates Age max number, shows errors', () => {
@@ -125,7 +124,6 @@ describe('Form validation, errors', () => {
         expect(errorMessage).toHaveTextContent(ageErrorText);
       })
     });
-    
   });
 
   test('Validates Age min number, shows errors', () => {
@@ -143,13 +141,12 @@ describe('Form validation, errors', () => {
         expect(errorMessage).toHaveTextContent(ageErrorText);
       })
     });
-    
   });
 
-  test('Validates SelectField with "City" selected, shows error', () => {
+  test('Validates SelectField with "City" selected, shows errors', () => {
     const selectFieldElements = screen.getAllByTestId('memberCity');
 
-    selectFieldElements.forEach((selectFieldElement, index) => {
+    selectFieldElements.forEach((selectFieldElement) => {
 
       fireEvent.click(selectFieldElement);
       
@@ -166,9 +163,89 @@ describe('Form validation, errors', () => {
       errorMessages.forEach((errorMessage) => {
         expect(errorMessage).toHaveTextContent(cityErrorText);
       })
-
     });
+  });
+});
 
+describe('Form validation, without errors', () => {
+  beforeEach(() => {
+    render(<App />);
   });
 
+  test('Validates Name, does not shows errors', () => {
+    const nameInputElements = screen.getAllByTestId('memberName');
+
+    nameInputElements.forEach((nameInputElement) => {
+
+      fireEvent.change(nameInputElement, { target: { value: 'Batman' } });
+      expect(nameInputElement).not.toHaveClass('error');
+
+      const errorMessagesWrappers = screen.getAllByTestId('form-error-wrapper');
+      expect(errorMessagesWrappers).toHaveLength(2);
+
+      errorMessagesWrappers.forEach((errorMessagesWrapper) => {
+        
+        expect(errorMessagesWrapper).toHaveTextContent('');
+      });
+    });
+  });
+
+  test('Validates Surname, does not shows errors', () => {
+    const surnameInputElements = screen.getAllByTestId('memberSurname');
+
+    surnameInputElements.forEach((surnameInputElement) => {
+
+      fireEvent.change(surnameInputElement, { target: { value: 'Stackham' } });
+      expect(surnameInputElement).not.toHaveClass('error');
+
+      const errorMessagesWrappers = screen.getAllByTestId('form-error-wrapper');
+      expect(errorMessagesWrappers).toHaveLength(2);
+
+      errorMessagesWrappers.forEach((errorMessagesWrapper) => {
+
+        expect(errorMessagesWrapper).toHaveTextContent('');
+      });
+    });
+  });
+
+  test('Validates Age, does not shows errors', () => {
+    const ageInputElements = screen.getAllByTestId('memberAge');
+
+    ageInputElements.forEach((ageInputElement) => {
+
+      fireEvent.change(ageInputElement, { target: { value: '28' } });
+      expect(ageInputElement).not.toHaveClass('error');
+
+      const errorMessagesWrappers = screen.getAllByTestId('form-error-wrapper');
+      expect(errorMessagesWrappers).toHaveLength(2);
+
+      errorMessagesWrappers.forEach((errorMessagesWrapper) => {
+
+        expect(errorMessagesWrapper).toHaveTextContent('');
+      });
+    });
+  });
+
+  test('Validates SelectField with "Liepāja" selected, does not show errors', () => {
+    const selectFieldElements = screen.getAllByTestId('memberCity');
+
+    selectFieldElements.forEach((selectFieldElement) => {
+
+      fireEvent.click(selectFieldElement);
+      
+      const cityOptions = screen.getAllByText('Liepāja');
+
+      cityOptions.forEach((cityElement) => {
+        fireEvent.click(cityElement);
+        console.log(cityElement.textContent);
+      });
+      
+      const errorMessagesWrappers = screen.getAllByTestId('form-error-wrapper');
+      expect(errorMessagesWrappers).toHaveLength(2);
+
+      errorMessagesWrappers.forEach((errorMessagesWrapper) => {
+        expect(errorMessagesWrapper).toHaveTextContent('');
+      });
+    });
+  });
 });
