@@ -249,3 +249,56 @@ describe('Form validation, without errors', () => {
     });
   });
 });
+
+describe('Form submission', () => {
+
+  beforeEach(() => {
+    render(<App />);
+  });
+
+  test('Submits the form with valid data and adds data to the table', () => {
+
+    const nameInputElements = screen.getAllByTestId('memberName');
+    const surnameInputElements = screen.getAllByTestId('memberSurname');
+    const ageInputElements = screen.getAllByTestId('memberAge');
+    const citySelectElements = screen.getAllByTestId('memberCity');
+    const submitButtonElements = screen.getAllByTestId('btn-submit');
+
+    nameInputElements.forEach((nameInputElement) => {
+      fireEvent.change(nameInputElement, { target: { value: 'Sonia' } });
+    });
+
+    surnameInputElements.forEach((surnameInputElement) => {
+      fireEvent.change(surnameInputElement, { target: { value: 'Lopata' } });
+    });
+
+    ageInputElements.forEach((ageInputElement) => {
+      fireEvent.change(ageInputElement, { target: { value: '43' } });
+    });
+
+    citySelectElements.forEach((citySelectElement) => {
+        fireEvent.click(citySelectElement);
+        const cityOptions = screen.getAllByText('Ogre');
+        cityOptions.forEach((cityElement) => {
+          fireEvent.click(cityElement);
+        });
+    });
+
+    fireEvent.click(submitButtonElements[0]);
+
+    const tableRows = screen.getAllByTestId('table-row');
+    expect(tableRows).toHaveLength(1);
+
+    const tableRowCells = tableRows[0].querySelectorAll('td');
+    expect(tableRowCells[0]).toHaveTextContent('Sonia');
+    expect(tableRowCells[1]).toHaveTextContent('Lopata');
+    expect(tableRowCells[2]).toHaveTextContent('43');
+    expect(tableRowCells[3]).toHaveTextContent('Ogre');
+
+    console.log(tableRowCells[0].textContent);
+    console.log(tableRowCells[1].textContent);
+    console.log(tableRowCells[2].textContent);
+    console.log(tableRowCells[3].textContent);
+
+  });
+});

@@ -2,7 +2,7 @@ import Button from "../Button/Button";
 
 const TableRow = ({ member, editHandle, deleteHandle }) => {
   return (
-    <tr>
+    <tr data-testid='table-row'>
       <td>{member.memberName}</td>
       <td>{member.memberSurname}</td>
       <td className='narrow'>{member.memberAge}</td>
