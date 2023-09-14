@@ -1,5 +1,4 @@
-$formBodyBcg: rgba(0,0,0,.4)
-$formBodyBcgDark: rgba(0,0,0,.6)
+@import '../../_variables'
   
 .App__modal-container
   position: fixed
@@ -11,8 +10,8 @@ $formBodyBcgDark: rgba(0,0,0,.6)
   justify-content: center
   align-items: center
   z-index: 1
-  background-color: $formBodyBcg
+  background-color: $modalBodyBcg
   z-index: 50
 
   .dark-theme &
-    background-color: $formBodyBcgDark
+    background-color: $modalBodyBcgDark
