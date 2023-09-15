@@ -114,38 +114,33 @@ function App() {
 
   const handleTableCopy = (tableId) => {
 
-    if(tableId === initialTableId) {
+    const newCopiedTableId = uuid();
+    const copiedTableData = copiedTables.find((table) => table.id === tableId);
+
+    if (tableId === initialTableId) {
       const newCopiedTable = [...members];
-
-      const copiedTableId = uuid();
-
       const newCopiedTableData = {
-        id: copiedTableId,
+        id: newCopiedTableId,
         tableData: newCopiedTable
-      }
-
+      };
       setCopiedTables([...copiedTables, newCopiedTableData]);
-
-    } else {
-      const copiedTableData = copiedTables.find((table) => table.id === tableId);
-
-      if (copiedTableData) {
-
-        const copiedTableId = uuid();
-
-        const newCopiedTableData = {
-          id: copiedTableId,
-          tableData: [...copiedTableData.tableData],
-        };
-
-        setCopiedTables([...copiedTables, newCopiedTableData]);
-      }
+    } else if (copiedTableData) {
+      const newCopiedTable = [...copiedTableData.tableData];
+      const newCopiedTableData = {
+        id: newCopiedTableId,
+        tableData: newCopiedTable
+      };
+      setCopiedTables([...copiedTables, newCopiedTableData]);
     }
-    
-  }
+  };
 
   const handleTableDelete = (tableId) => {
-    console.log('try to delete the table with tableId: ', tableId)
+    const newCopiedTables = copiedTables.filter((table) => table.id !== tableId);
+    if (tableId !== initialTableId) {
+      setCopiedTables(newCopiedTables);
+    } else {
+      console.log('Can not delete initial table');
+    }
   }
 
   const toggleTheme = () => {
