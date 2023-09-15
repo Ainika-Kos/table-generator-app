@@ -105,11 +105,24 @@ function App() {
     setChangedMemberData(initialAddMemberData);
   }
 
-  const handleDeletetMember = (memberId) => {
-    const newMembers = [...members];
-    const index = members.findIndex((member) => member.id === memberId);
-    newMembers.splice(index, 1);
-    setMembers(newMembers);
+  const handleDeletetMember = (memberId, tableId) => {
+
+    if (tableId === initialTableId) {
+      const newMembers = members.filter((member) => member.id !== memberId);
+      setMembers(newMembers);
+    }
+
+    const updatedCopiedTables = copiedTables.map((table) => {
+      if (table.id === tableId) {
+        return {
+          ...table,
+          tableData: table.tableData.filter((member) => member.id !== memberId),
+        };
+      }
+      return table;
+    });
+    setCopiedTables(updatedCopiedTables);
+    
   }
 
   const handleTableCopy = (tableId) => {
@@ -191,6 +204,7 @@ function App() {
         members={members}
         handleEditMember={handleOpenModalForm}
         handleDeletetMember={handleDeletetMember}
+        tableId={initialTableId}
       />
       {copiedTables.length > 0 && (
         <div className='App__tables-wrapper'>
@@ -218,6 +232,7 @@ function App() {
                 members={tableData}
                 handleEditMember={handleOpenModalForm}
                 handleDeletetMember={handleDeletetMember}
+                tableId={id}
               />
             </div>
           ))}

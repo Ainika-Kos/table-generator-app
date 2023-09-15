@@ -1,7 +1,7 @@
 import './Table.sass';
 import TableRow from '../TableRow/TableRow';
 
-const Table = ({ members, handleEditMember, handleDeletetMember }) => {
+const Table = ({ members, handleEditMember, handleDeletetMember, tableId }) => {
   return (
     <table className='App__table' data-testid='table'>
       <thead className='App__thead'>
@@ -18,8 +18,8 @@ const Table = ({ members, handleEditMember, handleDeletetMember }) => {
           <TableRow
             member={member}
             key={member.id}
-            editHandle={() => handleEditMember(member.id)}
-            deleteHandle={() => handleDeletetMember(member.id)}
+            editHandle={() => handleEditMember(member.id, tableId)}
+            deleteHandle={() => handleDeletetMember(member.id, tableId)}
           />
         ))}
       </tbody>
