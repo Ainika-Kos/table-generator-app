@@ -6,6 +6,7 @@ import Form from './Form/Form';
 import Table from './Table/Table';
 import Modal from './Modal/Modal';
 import SwitchToggler from './SwitchToggler/SwitchToggler';
+import deleteIcon from '../assets/deleteIcon.svg'
 
 const initialAddMemberData = {
   id: '',
@@ -14,6 +15,8 @@ const initialAddMemberData = {
   memberAge: '',
   memberCity: ''
 };
+
+const initialTableId = uuid();
 
 function App() {
 
@@ -109,9 +112,40 @@ function App() {
     setMembers(newMembers);
   }
 
-  const handleTableCopy = () => {
-    const newCopiedTable = [...members];
-    setCopiedTables([...copiedTables, newCopiedTable]);
+  const handleTableCopy = (tableId) => {
+
+    if(tableId === initialTableId) {
+      const newCopiedTable = [...members];
+
+      const copiedTableId = uuid();
+
+      const newCopiedTableData = {
+        id: copiedTableId,
+        tableData: newCopiedTable
+      }
+
+      setCopiedTables([...copiedTables, newCopiedTableData]);
+
+    } else {
+      const copiedTableData = copiedTables.find((table) => table.id === tableId);
+
+      if (copiedTableData) {
+
+        const copiedTableId = uuid();
+
+        const newCopiedTableData = {
+          id: copiedTableId,
+          tableData: [...copiedTableData.tableData],
+        };
+
+        setCopiedTables([...copiedTables, newCopiedTableData]);
+      }
+    }
+    
+  }
+
+  const handleTableDelete = (tableId) => {
+    console.log('try to delete the table with tableId: ', tableId)
   }
 
   const toggleTheme = () => {
@@ -140,14 +174,24 @@ function App() {
           buttonText='Add'
         />
       </div>
-      <Button
-        buttonType='button'
-        buttonClass='btn'
-        buttonText='Copy'
-        buttonDisabled={false}
-        onClick={handleTableCopy}
-        testId='btn-copy'
-      />
+      <div className='App__btns-wrapper'>
+        <Button
+          buttonType='button'
+          buttonClass='btn btn--table-copy'
+          buttonText='Copy table'
+          buttonDisabled={false}
+          onClick={() => handleTableCopy(initialTableId)}
+          testId='btn-copy'
+        />
+        <Button
+          buttonType='button'
+          buttonClass='btn btn--small btn--delete'
+          buttonText={<img src={deleteIcon} alt="Delete Icon" />}
+          buttonDisabled={false}
+          onClick={() => handleTableDelete(initialTableId)}
+          testId='btn-copy'
+        />
+      </div>
       <Table
         members={members}
         handleEditMember={handleOpenModalForm}
@@ -155,13 +199,32 @@ function App() {
       />
       {copiedTables.length > 0 && (
         <div className='App__tables-wrapper'>
-          {copiedTables.map((copiedTableData) => (
-            <Table
-              key={copiedTableData.id}
-              members={copiedTableData}
-              handleEditMember={handleOpenModalForm}
-              handleDeletetMember={handleDeletetMember}
-            />
+          {copiedTables.map(({id, tableData}) => (
+            <div className='App__table-wrapper' key={id}>
+              <div className='App__btns-wrapper'>
+                <Button
+                  buttonType='button'
+                  buttonClass='btn btn--table-copy'
+                  buttonText='Copy table'
+                  buttonDisabled={false}
+                  onClick={() => handleTableCopy(id)}
+                  testId='btn-copy'
+                />
+                <Button
+                  buttonType='button'
+                  buttonClass='btn btn--small btn--delete'
+                  buttonText={<img src={deleteIcon} alt="Delete Icon" />}
+                  buttonDisabled={false}
+                  onClick={() => handleTableDelete(id)}
+                  testId='btn-copy'
+                />
+              </div>
+              <Table
+                members={tableData}
+                handleEditMember={handleOpenModalForm}
+                handleDeletetMember={handleDeletetMember}
+              />
+            </div>
           ))}
         </div>
       )}

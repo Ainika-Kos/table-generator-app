@@ -25,7 +25,16 @@
     justify-content: center
     align-items: center
     gap: 30px
-    margin: 30px auto
+    margin: 48px auto
+
+  &__btns-wrapper
+    position: relative
+    width: 100%
+    max-width: 600px
+    display: flex
+    justify-content: flex-end
+    gap: 22px
+    margin-bottom: 12px
 
   &__tables-wrapper
     position: relative
@@ -37,6 +46,14 @@
     align-items: center
     gap: 30px
     margin: 30px auto
+
+  &__table-wrapper
+    position: relative
+    width: 100%
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
 
 @media (min-width: $layout-breakpoint-mobile-xs)
   .App__forms-wrapper
