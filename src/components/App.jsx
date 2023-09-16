@@ -202,6 +202,11 @@ function App() {
         tableData: newCopiedTable
       };
       setCopiedTables([...copiedTables, newCopiedTableData]);
+      if(members.length > 0) {
+        handleShowToast('copyTableSuccess');
+      } else {
+        handleShowToast('copyTableWarning');
+      }
     } else if (copiedTableData) {
       const newCopiedTable = [...copiedTableData.tableData];
       const newCopiedTableData = {
@@ -209,8 +214,12 @@ function App() {
         tableData: newCopiedTable
       };
       setCopiedTables([...copiedTables, newCopiedTableData]);
+      if (copiedTableData.length > 0) {
+        handleShowToast('copyTableSuccess');
+      } else {
+        handleShowToast('copyTableWarning');
+      }
     }
-    handleShowToast('copyTableSuccess');
   };
 
   const handleTableDelete = (tableId) => {

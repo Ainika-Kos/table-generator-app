@@ -2,13 +2,15 @@ import './Toast.sass';
 import errorIcon from '../../assets/errorIcon.svg';
 import infoIcon from '../../assets/infoIcon.svg';
 import successIcon from '../../assets/successIcon.svg';
+import warningIcon from '../../assets/warningIcon.svg';
 
 const Toast = ({ toastText, toastStatus }) => {
 
   const statusIcons = {
     error: errorIcon,
     info: infoIcon,
-    success: successIcon
+    success: successIcon,
+    warning: warningIcon
   }
 
   const toastIconSrc = statusIcons[toastStatus];

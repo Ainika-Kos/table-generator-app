@@ -25,6 +25,11 @@ const toastMessages = [
     message: 'The table has been successfully copied',
   },
   {
+    key: 'copyTableWarning',
+    status: 'warning',
+    message: 'Empty table has been copied',
+  },
+  {
     key: 'deleteTableSuccess',
     status: 'success',
     message: 'The table has been successfully deleted',
