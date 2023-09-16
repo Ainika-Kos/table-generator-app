@@ -11,7 +11,9 @@
   align-items: center
   background-color: $pageBcg
   color: $pageColor
-  transition: background-color 0.3s ease, color 0.3s ease
+  transition: .25s cubic-bezier(.785,.135,.15,.86)
+  transition-property: background-color, color
+  transition-delay: .08s, 0s
   will-change: background-color, color
 
   &.dark-theme

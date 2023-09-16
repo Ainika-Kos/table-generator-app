@@ -28,7 +28,9 @@
 .App__thead
   background-color: $tableHeadBcg
   color: $tableHeadColor
-  transition: background-color 0.3s ease, color 0.3s ease
+  transition: .25s cubic-bezier(.785,.135,.15,.86)
+  transition-property: background-color, COLOR
+  transition-delay: .08s, 0s
   will-change: background-color, color
 
   .dark-theme &
