@@ -323,7 +323,7 @@ function App() {
       {copiedTables.length > 0 && (
         <div className='App__tables-wrapper'>
           {copiedTables.map(({id, tableData}) => (
-            <div className='App__table-wrapper' key={id}>
+            <div className='App__table-wrapper' key={id} data-testid='copied-table'>
               <div className='App__btns-wrapper'>
                 <Button
                   buttonType='button'

@@ -329,6 +329,23 @@ describe('Opens and closes Modal form', () => {
     expect(modalTitle).not.toBeInTheDocument();
     expect(modalSubmitButton).not.toBeInTheDocument();
   });
+});
 
-  
+describe('Makes copy of the table and deletes the table', () => {
+  beforeEach(() => {
+    render(<App />);
+  });
+
+  test('Makes table copy', () => {
+    const copyBtn = screen.getByTestId('btn-copy');
+    fireEvent.click(copyBtn);
+    const copiedTable = screen.queryByTestId('copied-table');
+    expect(copiedTable).toBeInTheDocument();
+    fireEvent.click(copyBtn);
+    const copiedTables = screen.getAllByTestId('copied-table');
+    expect(copiedTables).toHaveLength(2);
+    fireEvent.click(copyBtn);
+    const newCopiedTables = screen.getAllByTestId('copied-table');
+    expect(newCopiedTables).toHaveLength(3);
+  })
 });
