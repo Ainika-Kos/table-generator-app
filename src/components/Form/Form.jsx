@@ -5,7 +5,7 @@ import InputField from '../InputField/InputField';
 import SelectField from '../SelectField/SelectField';
 import Button from '../Button/Button';
 
-const Form = ({ addMemberData, handleAddMemberChange, handleAddMemberSubmit, isControlledInput, buttonText, tableId }) => {
+const Form = ({ addMemberData, handleAddMemberChange, handleAddMemberSubmit, isControlledInput, buttonText, isEditForm }) => {
 
   const [formisValid, setFormIsValid] = useState(false);
   const [errors, setErrors] = useState({});
@@ -48,6 +48,7 @@ const Form = ({ addMemberData, handleAddMemberChange, handleAddMemberSubmit, isC
 
   return (
     <form className='App__form' data-testid='form'>
+      {isEditForm && (<h2 className='App__form__title'>Editing form</h2>)}
       <InputField
         name='memberName'
         type='text'

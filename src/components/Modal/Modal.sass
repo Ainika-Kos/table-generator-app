@@ -1,17 +1,18 @@
 @import '../../_variables'
   
-.App__modal-container
-  position: fixed
-  top: 0
-  left: 0
-  width: 100%
-  height: 100%
-  display: flex
-  justify-content: center
-  align-items: center
-  z-index: 1
-  background-color: $modalBodyBcg
-  z-index: 50
+.App
+  &__modal-container
+    position: fixed
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    display: flex
+    justify-content: center
+    align-items: center
+    z-index: 1
+    background-color: $modalBodyBcg
+    z-index: 50
 
-  .dark-theme &
-    background-color: $modalBodyBcgDark
+    .dark-theme &
+      background-color: $modalBodyBcgDark

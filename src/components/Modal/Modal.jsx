@@ -1,6 +1,6 @@
 import './Modal.sass';
 import Form from '../Form/Form';
-const Modal = ({ existingMemberData, handleAddMemberChange, handleEditMemberSubmit, handleCloseModal, tableId }) => {
+const Modal = ({ existingMemberData, handleAddMemberChange, handleEditMemberSubmit, handleCloseModal, tableId, isEditForm }) => {
 
   return (
     <div
@@ -13,6 +13,7 @@ const Modal = ({ existingMemberData, handleAddMemberChange, handleEditMemberSubm
         handleAddMemberSubmit={(e) => handleEditMemberSubmit(e, tableId)}
         isControlledInput={false}
         buttonText='Agree'
+        isEditForm={isEditForm}
       />
     </div>
   );

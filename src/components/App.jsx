@@ -203,7 +203,7 @@ function App() {
           handleAddMemberSubmit={handleAddMemberSubmit}
           isControlledInput={true}
           buttonText='Add'
-          tableId={initialTableId}
+          isEditForm={false}
         />
         <Form
           addMemberData={addMemberData}
@@ -211,7 +211,7 @@ function App() {
           handleAddMemberSubmit={handleAddMemberSubmit}
           isControlledInput={true}
           buttonText='Add'
-          tableId={initialTableId}
+          isEditForm={false}
         />
       </div>
       <div className='App__btns-wrapper'>
@@ -277,6 +277,7 @@ function App() {
           handleEditMemberSubmit={handleEditMemberSubmit}
           handleCloseModal={handleCloseModalForm}
           tableId={editableTableId}
+          isEditForm={true}
         />
       }
     </div>
