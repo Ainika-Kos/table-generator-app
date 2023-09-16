@@ -347,5 +347,16 @@ describe('Makes copy of the table and deletes the table', () => {
     fireEvent.click(copyBtn);
     const newCopiedTables = screen.getAllByTestId('copied-table');
     expect(newCopiedTables).toHaveLength(3);
-  })
+  });
+
+  test('Deletes a table', () => {
+
+    const deleteBtns = screen.getAllByTestId('btn-delete');
+    expect(deleteBtns).toHaveLength(4);
+
+    fireEvent.click(deleteBtns[3]);
+
+    const newCopiedTables = screen.getAllByTestId('copied-table');
+    expect(newCopiedTables).toHaveLength(2);
+  });
 });

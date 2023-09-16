@@ -339,7 +339,7 @@ function App() {
                   buttonText={<img src={deleteIcon} alt="Delete Icon" />}
                   buttonDisabled={false}
                   onClick={() => handleTableDelete(id)}
-                  testId='btn-copy'
+                  testId='btn-delete'
                 />
               </div>
               <Table

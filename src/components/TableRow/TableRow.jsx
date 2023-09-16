@@ -22,7 +22,7 @@ const TableRow = ({ member, editHandle, deleteHandle }) => {
           buttonText='Delete'
           buttonDisabled={false}
           onClick={deleteHandle}
-          testId='btn-delete'
+          testId='btn-delete-row'
         />
       </td>
     </tr>
