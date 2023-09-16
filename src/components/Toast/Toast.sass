@@ -6,16 +6,15 @@
     bottom: 5vh
     width: auto
     min-width: 200px
-    max-width: 250px
+    max-width: 200px
     display: flex
-    align-items: center
     background-color: $toastContainerBcg
     border-radius: $toastContainerBorderRadius
     padding: 6px 16px
     box-shadow: $toastContainerBoxSHadow
     z-index: 10
     gap: 8px
-    animation: toast-in-right 3s
+    animation: toast-in-right 3s, fade-out 3s forwards
     transition: transform 3s, opacity 3s, box-shadow 3s ease-in-out
 
   &__text-wrapper
@@ -49,5 +48,15 @@
 @keyframes toast-in-right
   from
     transform: translateX(100%)
+    opacity: 0
   to
     transform: translateX(0)
+    opacity: 1
+
+@keyframes fade-out
+  0%
+    opacity: 1
+  80%
+    opacity: 1
+  100%
+    opacity: 0
