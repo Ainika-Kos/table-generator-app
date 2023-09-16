@@ -217,7 +217,7 @@ function App() {
       setTimeout(() => {
         setShowToast(false);
         setToastData(initialToastData);
-      }, 2000);
+      }, 3000);
     }
     
   }
@@ -317,7 +317,7 @@ function App() {
       {showToast &&
         <Toast
           toastText={toastData.toastMessage}
-          toastClass={toastData.toastStatus}
+          toastStatus={toastData.toastStatus}
         />
       }
     </div>
