@@ -46,7 +46,6 @@ function App() {
     } else {
       setAddMemberData({ ...addMemberData, [name]: value })
     }
-    handleShowToast('success', 'Member has been added');
 
   };
 
@@ -70,6 +69,7 @@ function App() {
     const newMembers = [...members, newMember];
     setMembers(newMembers);
     setAddMemberData(initialAddMemberData);
+    handleShowToast('success', 'A member has been added');
   };
 
   const handleOpenModalForm = (memberId, tableId) => {
@@ -95,6 +95,7 @@ function App() {
   const handleCloseModalForm = () => {
     setModalIsOpen(false);
     setIsEditMember(false);
+    handleShowToast('warning', 'No changes have been made');
   }
 
   const handleEditMemberSubmit = (e, tableId) => {
@@ -133,7 +134,7 @@ function App() {
 
     setMembers(newMembers);
     handleResetModalForm();
-    
+    handleShowToast('success', 'Modifications have been successfully saved to the table');
   };
 
   const handleResetModalForm = () => {
@@ -160,7 +161,7 @@ function App() {
       return table;
     });
     setCopiedTables(updatedCopiedTables);
-    
+    handleShowToast('success', 'Data has been successfully deleted from the tablee');
   }
 
   const handleTableCopy = (tableId) => {
@@ -183,14 +184,16 @@ function App() {
       };
       setCopiedTables([...copiedTables, newCopiedTableData]);
     }
+    handleShowToast('success', 'The table has been successfully copied');
   };
 
   const handleTableDelete = (tableId) => {
     const newCopiedTables = copiedTables.filter((table) => table.id !== tableId);
     if (tableId !== initialTableId) {
       setCopiedTables(newCopiedTables);
+      handleShowToast('success', 'The table has been successfully deleted');
     } else {
-      console.log('Can not delete initial table');
+      handleShowToast('error', 'Unable to delete the initial table');
     }
   }
 
@@ -204,7 +207,12 @@ function App() {
       ...toastData,
       toastStatus,
       toastMessage
-    })
+    });
+
+    setTimeout(() => {
+      setShowToast(false);
+      setToastData(initialToastData);
+    }, 2000);
   }
 
   return (
