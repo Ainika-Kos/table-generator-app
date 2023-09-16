@@ -4,20 +4,11 @@
   width: 100%
   height: 100%
   min-height: 100%
-  padding: 35px 10px
+  padding: 35px 10px 75px 10px
   height: auto
   display: flex
   flex-direction: column
   align-items: center
-  background-color: $pageBcg
-  color: $pageColor
-  transition: .25s cubic-bezier(.785,.135,.15,.86)
-  transition-property: background-color, color
-  transition-delay: .08s, 0s
-  will-change: background-color, color
-
-  &.dark-theme
-    background-color: $pageBcgDark
 
   &__forms-wrapper
     position: relative
@@ -59,5 +50,7 @@
     align-items: center
 
 @media (min-width: $layout-breakpoint-mobile-xs)
+  .App
+    padding: 35px 10px
   .App__forms-wrapper
     flex-direction: row

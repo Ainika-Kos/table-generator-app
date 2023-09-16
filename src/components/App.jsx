@@ -243,7 +243,9 @@ function App() {
   }
 
   const toggleTheme = () => {
-    setIsDarkTheme(!isDarkTheme);
+    const newDarkTheme = !isDarkTheme;
+    setIsDarkTheme(newDarkTheme);
+    document.body.classList.toggle('dark-theme', newDarkTheme);
   };
 
   const handleShowToast = (toastKey) => {
@@ -269,7 +271,7 @@ function App() {
   }, [toastQueue]);
 
   return (
-    <div className={`App ${isDarkTheme ? 'dark-theme' : ''}`} data-testid='app'>
+    <div className='App' data-testid='app'>
       <SwitchToggler
         isDarkTheme={isDarkTheme}
         onChange={toggleTheme}
