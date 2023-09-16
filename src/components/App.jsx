@@ -7,7 +7,8 @@ import Modal from './Modal/Modal';
 import SwitchToggler from './SwitchToggler/SwitchToggler';
 import Toast from './Toast/Toast'
 import Table from './Table/Table';
-import deleteIcon from '../assets/deleteIcon.svg'
+import deleteIcon from '../assets/deleteIcon.svg';
+import toastMessages from '../data/toastMessages';
 
 const initialAddMemberData = {
   id: '',
@@ -69,7 +70,7 @@ function App() {
     const newMembers = [...members, newMember];
     setMembers(newMembers);
     setAddMemberData(initialAddMemberData);
-    handleShowToast('success', 'A member has been added');
+    handleShowToast('addMemberSuccess');
   };
 
   const handleOpenModalForm = (memberId, tableId) => {
@@ -95,7 +96,7 @@ function App() {
   const handleCloseModalForm = () => {
     setModalIsOpen(false);
     setIsEditMember(false);
-    handleShowToast('warning', 'No changes have been made');
+    handleShowToast('noChangesInfo');
   }
 
   const handleEditMemberSubmit = (e, tableId) => {
@@ -134,7 +135,7 @@ function App() {
 
     setMembers(newMembers);
     handleResetModalForm();
-    handleShowToast('success', 'Modifications have been successfully saved to the table');
+    handleShowToast('savedChangesSuccess');
   };
 
   const handleResetModalForm = () => {
@@ -161,7 +162,7 @@ function App() {
       return table;
     });
     setCopiedTables(updatedCopiedTables);
-    handleShowToast('success', 'Data has been successfully deleted from the tablee');
+    handleShowToast('deleteDataSuccess');
   }
 
   const handleTableCopy = (tableId) => {
@@ -184,16 +185,16 @@ function App() {
       };
       setCopiedTables([...copiedTables, newCopiedTableData]);
     }
-    handleShowToast('success', 'The table has been successfully copied');
+    handleShowToast('copyTableSuccess');
   };
 
   const handleTableDelete = (tableId) => {
     const newCopiedTables = copiedTables.filter((table) => table.id !== tableId);
     if (tableId !== initialTableId) {
       setCopiedTables(newCopiedTables);
-      handleShowToast('success', 'The table has been successfully deleted');
+      handleShowToast('deleteTableSuccess');
     } else {
-      handleShowToast('error', 'Unable to delete the initial table');
+      handleShowToast('unableToDeleteTable');
     }
   }
 
@@ -201,18 +202,24 @@ function App() {
     setIsDarkTheme(!isDarkTheme);
   };
 
-  const handleShowToast = (toastStatus, toastMessage) => {
-    setShowToast(true);
-    setToastData( {
-      ...toastData,
-      toastStatus,
-      toastMessage
-    });
+  const handleShowToast = (toastKey) => {
+    const index = toastMessages.findIndex((toast) => toast.key === toastKey);
+    const selectedToast = toastMessages[index];
 
-    setTimeout(() => {
-      setShowToast(false);
-      setToastData(initialToastData);
-    }, 2000);
+    if (selectedToast) {
+      setShowToast(true);
+      setToastData({
+        ...toastData,
+        toastStatus: selectedToast.status,
+        toastMessage: selectedToast.message
+      });
+
+      setTimeout(() => {
+        setShowToast(false);
+        setToastData(initialToastData);
+      }, 2000);
+    }
+    
   }
 
   return (
