@@ -294,11 +294,5 @@ describe('Form submission', () => {
     expect(tableRowCells[1]).toHaveTextContent('Lopata');
     expect(tableRowCells[2]).toHaveTextContent('43');
     expect(tableRowCells[3]).toHaveTextContent('Ogre');
-
-    console.log(tableRowCells[0].textContent);
-    console.log(tableRowCells[1].textContent);
-    console.log(tableRowCells[2].textContent);
-    console.log(tableRowCells[3].textContent);
-
   });
 });

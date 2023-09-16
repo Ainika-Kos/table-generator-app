@@ -91,11 +91,9 @@ function App() {
 
   const handleEditMemberSubmit = (e, tableId) => {
     e.preventDefault();
-    console.log(tableId);
 
     const newMembers = [...members];
     const editedMemberId = changedMemberData.id;
-    console.log(editedMemberId);
 
     if (tableId === initialTableId) {
       const index = members.findIndex((member) => member.id === editedMemberId);
@@ -113,7 +111,7 @@ function App() {
       
       const copiedTable = copiedTables[copiedTableIndex];
       const tableDataIndex = copiedTable.tableData.findIndex((member) => member.id === editedMemberId);
-      console.log(tableDataIndex);
+
       if (tableDataIndex !== -1) {
         copiedTable.tableData[tableDataIndex] = {
           ...copiedTable.tableData[tableDataIndex],
