@@ -184,19 +184,20 @@ function App() {
 
     const updatedCopiedTables = copiedTables.map((table) => {
       if (table.id === tableId) {
+        const tableData = table.tableData.filter((member) => member.id !== memberId);
+        if (tableData.length > 0) {
+          handleShowToast('deleteDataSuccess');
+        } else {
+          handleShowToast('deleteDataWarning');
+        }
         return {
           ...table,
-          tableData: table.tableData.filter((member) => member.id !== memberId),
+          tableData,
         };
       }
       return table;
     });
     setCopiedTables(updatedCopiedTables);
-    if (updatedCopiedTables.length > 0) {
-      handleShowToast('deleteDataSuccess');
-    } else {
-      handleShowToast('deleteDataWarning');
-    }
   }
 
   const handleTableCopy = (tableId) => {
