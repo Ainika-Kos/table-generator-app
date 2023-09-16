@@ -1,5 +1,5 @@
 import './App.sass';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
 import Button from './Button/Button';
 import Form from './Form/Form';
@@ -17,10 +17,6 @@ const initialAddMemberData = {
   memberAge: '',
   memberCity: ''
 };
-const initialToastData = {
-  toastStatus: '',
-  toastMessage: ''
-};
 
 const initialTableId = uuid();
 
@@ -33,8 +29,7 @@ function App() {
   const [isEditMember, setIsEditMember] = useState(false);
   const [changedMemberData, setChangedMemberData] = useState(initialAddMemberData);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [showToast, setShowToast] = useState(false);
-  const [toastData, setToastData] = useState(initialToastData);
+  const [toastQueue, setToastQueue] = useState([]);
   const [isDarkTheme, setIsDarkTheme] = useState(false);
 
   const handleAddMemberChange = (e) => {
@@ -207,20 +202,22 @@ function App() {
     const selectedToast = toastMessages[index];
 
     if (selectedToast) {
-      setShowToast(true);
-      setToastData({
-        ...toastData,
-        toastStatus: selectedToast.status,
-        toastMessage: selectedToast.message
-      });
+      setToastQueue([...toastQueue, selectedToast]);
 
       setTimeout(() => {
-        setShowToast(false);
-        setToastData(initialToastData);
+        setToastQueue((prevQueue) => prevQueue.filter((item) => item.key !== toastKey));
       }, 3000);
     }
-    
-  }
+  };
+
+  useEffect(() => {
+    if (toastQueue.length > 0) {
+      const timer = setTimeout(() => {
+        setToastQueue((prevQueue) => prevQueue.slice(1));
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [toastQueue]);
 
   return (
     <div className={`App ${isDarkTheme ? 'dark-theme' : ''}`} data-testid='app'>
@@ -314,12 +311,13 @@ function App() {
           isEditForm={true}
         />
       }
-      {showToast &&
+      {toastQueue.map(({key, message, status}) => (
         <Toast
-          toastText={toastData.toastMessage}
-          toastStatus={toastData.toastStatus}
+          key={key}
+          toastText={message}
+          toastStatus={status}
         />
-      }
+      ))}
     </div>
   );
 }
