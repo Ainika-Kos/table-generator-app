@@ -3,9 +3,10 @@ import { useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import Button from './Button/Button';
 import Form from './Form/Form';
-import Table from './Table/Table';
 import Modal from './Modal/Modal';
 import SwitchToggler from './SwitchToggler/SwitchToggler';
+import Toast from './Toast/Toast'
+import Table from './Table/Table';
 import deleteIcon from '../assets/deleteIcon.svg'
 
 const initialAddMemberData = {
@@ -14,6 +15,10 @@ const initialAddMemberData = {
   memberSurname: '',
   memberAge: '',
   memberCity: ''
+};
+const initialToastData = {
+  toastStatus: '',
+  toastMessage: ''
 };
 
 const initialTableId = uuid();
@@ -27,6 +32,8 @@ function App() {
   const [isEditMember, setIsEditMember] = useState(false);
   const [changedMemberData, setChangedMemberData] = useState(initialAddMemberData);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [showToast, setShowToast] = useState(false);
+  const [toastData, setToastData] = useState(initialToastData);
   const [isDarkTheme, setIsDarkTheme] = useState(false);
 
   const handleAddMemberChange = (e) => {
@@ -39,6 +46,7 @@ function App() {
     } else {
       setAddMemberData({ ...addMemberData, [name]: value })
     }
+    handleShowToast('success', 'Member has been added');
 
   };
 
@@ -190,6 +198,15 @@ function App() {
     setIsDarkTheme(!isDarkTheme);
   };
 
+  const handleShowToast = (toastStatus, toastMessage) => {
+    setShowToast(true);
+    setToastData( {
+      ...toastData,
+      toastStatus,
+      toastMessage
+    })
+  }
+
   return (
     <div className={`App ${isDarkTheme ? 'dark-theme' : ''}`} data-testid='app'>
       <SwitchToggler
@@ -280,6 +297,12 @@ function App() {
           handleCloseModal={handleCloseModalForm}
           tableId={editableTableId}
           isEditForm={true}
+        />
+      }
+      {showToast &&
+        <Toast
+          toastText={toastData.toastMessage}
+          toastClass={toastData.toastStatus}
         />
       }
     </div>
