@@ -51,7 +51,7 @@ const Form = ({ addMemberData, handleAddMemberChange, handleAddMemberSubmit, isC
     <form className='App__form' data-testid='form'>
       {isEditForm && (<h2 className='App__form__title'>Editing form</h2>)}
       {isEditForm && (
-        <span className='App__form__close' onClick={handleCloseModal}>
+        <span className='App__form__close' onClick={handleCloseModal} data-testid='form-close'>
           <img src={deleteIcon} alt="Close Icon" />
           </span>
       )}

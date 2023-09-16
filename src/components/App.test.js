@@ -48,23 +48,23 @@ describe('Switch toggler', () => {
 
   test('Switch toggler switches the dark theme', () => {
     const switchTogglerInputElement = screen.getByTestId('switch-toggler-input');
+
+    expect(document.body.classList.contains('dark-theme')).toBe(false);
     
     fireEvent.click(switchTogglerInputElement);
 
-    const appElement = screen.getByTestId('app');
+    expect(document.body.classList.contains('dark-theme')).toBe(true);
 
-    expect(appElement).toHaveClass('dark-theme');
   });
 
   test('Switch toggler switches the light theme', () => {
     const switchTogglerInputElement = screen.getByTestId('switch-toggler-input');
     
     fireEvent.click(switchTogglerInputElement);
+    expect(document.body.classList.contains('dark-theme')).toBe(true);
     fireEvent.click(switchTogglerInputElement);
 
-    const appElement = screen.getByTestId('app');
-
-    expect(appElement).not.toHaveClass('dark-theme');
+    expect(document.body.classList.contains('dark-theme')).toBe(false);
   });
 
 });
@@ -295,4 +295,40 @@ describe('Form submission', () => {
     expect(tableRowCells[2]).toHaveTextContent('43');
     expect(tableRowCells[3]).toHaveTextContent('Ogre');
   });
+});
+
+describe('Opens and closes Modal form', () => {
+  beforeEach(() => {
+    render(<App />);
+  });
+
+  test('Opens Modal form on edit button click', () => {
+    const editBtn = screen.getByTestId('btn-edit');
+    fireEvent.click(editBtn);
+
+    const modalTitle = screen.getByText('Editing form');
+    const modalSubmitButton = screen.getByText('Agree');
+
+    expect(modalTitle).toBeInTheDocument();
+    expect(modalSubmitButton).toBeInTheDocument();
+  });
+
+  test('Closes Modal form on close button click', () => {
+    const editBtn = screen.getByTestId('btn-edit');
+    fireEvent.click(editBtn);
+
+    const modalTitle = screen.getByText('Editing form');
+    const modalSubmitButton = screen.getByText('Agree');
+
+    expect(modalTitle).toBeInTheDocument();
+    expect(modalSubmitButton).toBeInTheDocument();
+
+    const closeModalButton = screen.getByTestId('form-close');
+    fireEvent.click(closeModalButton);
+
+    expect(modalTitle).not.toBeInTheDocument();
+    expect(modalSubmitButton).not.toBeInTheDocument();
+  });
+
+  
 });
