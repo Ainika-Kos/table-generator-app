@@ -201,6 +201,7 @@ function App() {
           addMemberData={addMemberData} 
           handleAddMemberChange={handleAddMemberChange}
           handleAddMemberSubmit={handleAddMemberSubmit}
+          handleCloseModal={handleCloseModalForm}
           isControlledInput={true}
           buttonText='Add'
           isEditForm={false}
@@ -209,6 +210,7 @@ function App() {
           addMemberData={addMemberData}
           handleAddMemberChange={handleAddMemberChange}
           handleAddMemberSubmit={handleAddMemberSubmit}
+          handleCloseModal={handleCloseModalForm}
           isControlledInput={true}
           buttonText='Add'
           isEditForm={false}

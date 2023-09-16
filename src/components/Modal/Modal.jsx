@@ -11,6 +11,7 @@ const Modal = ({ existingMemberData, handleAddMemberChange, handleEditMemberSubm
         addMemberData={existingMemberData}
         handleAddMemberChange={handleAddMemberChange}
         handleAddMemberSubmit={(e) => handleEditMemberSubmit(e, tableId)}
+        handleCloseModal={handleCloseModal}
         isControlledInput={false}
         buttonText='Agree'
         isEditForm={isEditForm}

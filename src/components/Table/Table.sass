@@ -29,6 +29,7 @@
   background-color: $tableHeadBcg
   color: $tableHeadColor
   transition: background-color 0.3s ease, color 0.3s ease
+  will-change: background-color, color
 
   .dark-theme &
     background-color: $tableHeadBcgDark
@@ -38,6 +39,7 @@
   background-color: $tableBodyBcg
   border-collapse: separate
   transition: background-color 0.3s ease
+  will-change: background-color, color
 
 @media (min-width: $layout-breakpoint-mobile-xs)
   .App__table

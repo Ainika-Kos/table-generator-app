@@ -1,11 +1,12 @@
 import './Form.sass';
 import { useState, useEffect } from 'react';
-import validationProperties from '../../data/validationSettings';
 import InputField from '../InputField/InputField';
 import SelectField from '../SelectField/SelectField';
 import Button from '../Button/Button';
+import deleteIcon from '../../assets/deleteIcon.svg'
+import validationProperties from '../../data/validationSettings';
 
-const Form = ({ addMemberData, handleAddMemberChange, handleAddMemberSubmit, isControlledInput, buttonText, isEditForm }) => {
+const Form = ({ addMemberData, handleAddMemberChange, handleAddMemberSubmit, isControlledInput, buttonText, isEditForm, handleCloseModal }) => {
 
   const [formisValid, setFormIsValid] = useState(false);
   const [errors, setErrors] = useState({});
@@ -49,6 +50,11 @@ const Form = ({ addMemberData, handleAddMemberChange, handleAddMemberSubmit, isC
   return (
     <form className='App__form' data-testid='form'>
       {isEditForm && (<h2 className='App__form__title'>Editing form</h2>)}
+      {isEditForm && (
+        <span className='App__form__close' onClick={handleCloseModal}>
+          <img src={deleteIcon} alt="Close Icon" />
+          </span>
+      )}
       <InputField
         name='memberName'
         type='text'
