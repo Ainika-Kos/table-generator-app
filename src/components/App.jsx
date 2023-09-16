@@ -22,6 +22,7 @@ function App() {
 
   const [members, setMembers] = useState([]);
   const [copiedTables, setCopiedTables] = useState([]);
+  const [editableTableId, setEditableTableId] = useState(initialTableId);
   const [addMemberData, setAddMemberData] = useState(initialAddMemberData);
   const [isEditMember, setIsEditMember] = useState(false);
   const [changedMemberData, setChangedMemberData] = useState(initialAddMemberData);
@@ -63,12 +64,24 @@ function App() {
     setAddMemberData(initialAddMemberData);
   };
 
-  const handleOpenModalForm = (memberId) => {
+  const handleOpenModalForm = (memberId, tableId) => {
+    if (tableId === initialTableId) {
+
+      const index = members.findIndex((member) => member.id === memberId);
+      const memberToEdit = members[index];
+      setIsEditMember(true);
+      setChangedMemberData(memberToEdit);
+    } else {
+      setEditableTableId(tableId);
+      const copiedTable = copiedTables.find((table) => table.id === tableId);
+      if (copiedTable) {
+        const index = copiedTable.tableData.findIndex((member) => member.id === memberId);
+        const memberToEdit = copiedTable.tableData[index];
+        setIsEditMember(true);
+        setChangedMemberData(memberToEdit);
+      }
+    }
     setModalIsOpen(true);
-    const index = members.findIndex((member) => member.id === memberId);
-    const memberToEdit = members[index];
-    setIsEditMember(true);
-    setChangedMemberData(memberToEdit);
   }
 
   const handleCloseModalForm = () => {
@@ -76,16 +89,17 @@ function App() {
     setIsEditMember(false);
   }
 
-  const handleEditMemberSubmit = (e) => {
+  const handleEditMemberSubmit = (e, tableId) => {
     e.preventDefault();
+    console.log(tableId);
 
     const newMembers = [...members];
-
     const editedMemberId = changedMemberData.id;
-    const index = members.findIndex((member) => member.id === editedMemberId);
+    console.log(editedMemberId);
 
-    if (index !== -1) {
-      
+    if (tableId === initialTableId) {
+      const index = members.findIndex((member) => member.id === editedMemberId);
+
       newMembers[index] = {
         ...newMembers[index],
         memberName: changedMemberData.memberName,
@@ -93,16 +107,34 @@ function App() {
         memberAge: changedMemberData.memberAge,
         memberCity: changedMemberData.memberCity,
       };
-
-      setMembers(newMembers);
-      handleResetModalForm();
+      
+    } else {
+      const copiedTableIndex = copiedTables.findIndex((table) => table.id === tableId);
+      
+      const copiedTable = copiedTables[copiedTableIndex];
+      const tableDataIndex = copiedTable.tableData.findIndex((member) => member.id === editedMemberId);
+      console.log(tableDataIndex);
+      if (tableDataIndex !== -1) {
+        copiedTable.tableData[tableDataIndex] = {
+          ...copiedTable.tableData[tableDataIndex],
+          memberName: changedMemberData.memberName,
+          memberSurname: changedMemberData.memberSurname,
+          memberAge: changedMemberData.memberAge,
+          memberCity: changedMemberData.memberCity,
+        };
+      }
     }
+
+    setMembers(newMembers);
+    handleResetModalForm();
+    
   };
 
   const handleResetModalForm = () => {
     setModalIsOpen(false);
     setIsEditMember(false);
     setChangedMemberData(initialAddMemberData);
+    setEditableTableId(initialTableId);
   }
 
   const handleDeletetMember = (memberId, tableId) => {
@@ -173,6 +205,7 @@ function App() {
           handleAddMemberSubmit={handleAddMemberSubmit}
           isControlledInput={true}
           buttonText='Add'
+          tableId={initialTableId}
         />
         <Form
           addMemberData={addMemberData}
@@ -180,6 +213,7 @@ function App() {
           handleAddMemberSubmit={handleAddMemberSubmit}
           isControlledInput={true}
           buttonText='Add'
+          tableId={initialTableId}
         />
       </div>
       <div className='App__btns-wrapper'>
@@ -244,6 +278,7 @@ function App() {
           handleAddMemberChange={handleAddMemberChange}
           handleEditMemberSubmit={handleEditMemberSubmit}
           handleCloseModal={handleCloseModalForm}
+          tableId={editableTableId}
         />
       }
     </div>

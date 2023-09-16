@@ -5,7 +5,7 @@ import InputField from '../InputField/InputField';
 import SelectField from '../SelectField/SelectField';
 import Button from '../Button/Button';
 
-const Form = ({ addMemberData, handleAddMemberChange, handleAddMemberSubmit, isControlledInput, buttonText }) => {
+const Form = ({ addMemberData, handleAddMemberChange, handleAddMemberSubmit, isControlledInput, buttonText, tableId }) => {
 
   const [formisValid, setFormIsValid] = useState(false);
   const [errors, setErrors] = useState({});
