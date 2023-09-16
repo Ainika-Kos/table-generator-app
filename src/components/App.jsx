@@ -20,6 +20,8 @@ const initialAddMemberData = {
 
 const initialTableId = uuid();
 
+const LOCAL_STORAGE_KEY = 'tableData';
+
 function App() {
 
   const [members, setMembers] = useState([]);
@@ -31,6 +33,34 @@ function App() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [toastQueue, setToastQueue] = useState([]);
   const [isDarkTheme, setIsDarkTheme] = useState(false);
+  const [initialLoad, setInitialLoad] = useState(true);
+
+  const loadDataFromLocalStorage = () => {
+    const storedData = localStorage.getItem(LOCAL_STORAGE_KEY);
+    return storedData ? JSON.parse(storedData) : null;
+  };
+
+  const saveDataToLocalStorage = (data) => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data));
+  };
+
+  useEffect(() => {
+    const loadedData = loadDataFromLocalStorage();
+    if (loadedData) {
+      setMembers(loadedData.members || []);
+      setCopiedTables(loadedData.copiedTables || []);
+    }
+    setInitialLoad(false);
+  }, []);
+
+  useEffect(() => {
+    if (!initialLoad) {
+      saveDataToLocalStorage({
+        members,
+        copiedTables,
+      });
+    }
+  }, [members, copiedTables, initialLoad]);
 
   const handleAddMemberChange = (e) => {
     e.preventDefault();
