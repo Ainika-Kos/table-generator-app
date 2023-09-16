@@ -20,6 +20,11 @@ const toastMessages = [
     message: 'Data has been successfully deleted from the table',
   },
   {
+    key: 'deleteDataWarning',
+    status: 'warning',
+    message: 'There is no more data in the table',
+  },
+  {
     key: 'copyTableSuccess',
     status: 'success',
     message: 'The table has been successfully copied',

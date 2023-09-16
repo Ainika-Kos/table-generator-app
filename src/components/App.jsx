@@ -175,6 +175,11 @@ function App() {
     if (tableId === initialTableId) {
       const newMembers = members.filter((member) => member.id !== memberId);
       setMembers(newMembers);
+      if(newMembers.length > 0) {
+        handleShowToast('deleteDataSuccess');
+      } else {
+        handleShowToast('deleteDataWarning');
+      }
     }
 
     const updatedCopiedTables = copiedTables.map((table) => {
@@ -187,7 +192,11 @@ function App() {
       return table;
     });
     setCopiedTables(updatedCopiedTables);
-    handleShowToast('deleteDataSuccess');
+    if (updatedCopiedTables.length > 0) {
+      handleShowToast('deleteDataSuccess');
+    } else {
+      handleShowToast('deleteDataWarning');
+    }
   }
 
   const handleTableCopy = (tableId) => {
