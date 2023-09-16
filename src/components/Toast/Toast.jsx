@@ -19,8 +19,10 @@ const Toast = ({ toastText, toastStatus }) => {
       <span className='App__toast-icon'>
         <img src={toastIconSrc} alt={`${toastStatus} Icon`} />
       </span>
-      <span className='App__toast-title'>{toastStatusText}</span>
-      <p className='App__toast-text'>{toastText}</p>
+      <div className='App__toast-text-wrapper'>
+        <p className='App__toast-title'>{toastStatusText}</p>
+        <p className='App__toast-text'>{toastText}</p>
+      </div>
     </div>
   );
 };
