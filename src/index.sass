@@ -15,12 +15,13 @@ html
   -moz-osx-font-smoothing: grayscale
   font-size: 12px
   font-weight: 400
-  background-color: $pageBcg
   color: $pageColor
   transition: .25s cubic-bezier(.785,.135,.15,.86)
   transition-property: background-color, color
   transition-delay: .08s, 0s
   will-change: background-color, color
 
+body
+  background-color: $pageBcg
   &.dark-theme
     background-color: $pageBcgDark
