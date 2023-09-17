@@ -17,7 +17,7 @@ const Toast = ({ toastText, toastStatus }) => {
   const toastStatusText = toastStatus.charAt(0).toUpperCase() + toastStatus.slice(1);
 
   return (
-    <div className={`App__toast-container ${toastStatus}`}>
+    <div className={`App__toast-container ${toastStatus}`} data-testid='toast-message'>
       <span className='App__toast-icon'>
         <img src={toastIconSrc} alt={`${toastStatus} Icon`} />
       </span>

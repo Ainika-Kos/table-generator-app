@@ -1,6 +1,7 @@
-import { render, fireEvent, screen} from '@testing-library/react';
+import { render, fireEvent, screen, act} from '@testing-library/react';
 import App from './App';
 import validationProperties from '../data/validationSettings';
+import toastMessages from '../data/toastMessages';
 
 const nameErrorText = validationProperties.find(item => item.errorName === 'name').errorText;
 const surnameErrorText = validationProperties.find(item => item.errorName === 'surname').errorText;
@@ -415,6 +416,63 @@ describe('Table row data actions', () => {
 
     const remainingTableRows = screen.queryAllByTestId('table-row');
     expect(remainingTableRows.length).toBe(0);
+  });
+});
 
+describe('Toast messages', () => {
+  beforeEach(() => {
+    render(<App />);
+  });
+
+  afterEach(() => {
+    jest.clearAllTimers();
+  });
+  
+  test('Shows success message, when member data is added', () => {
+    const nameInputElements = screen.getAllByTestId('memberName');
+    const surnameInputElements = screen.getAllByTestId('memberSurname');
+    const ageInputElements = screen.getAllByTestId('memberAge');
+    const citySelectElements = screen.getAllByTestId('memberCity');
+    const submitButtonElements = screen.getAllByTestId('btn-submit');
+
+    nameInputElements.forEach((nameInputElement) => {
+      fireEvent.change(nameInputElement, { target: { value: 'Sonia' } });
+    });
+
+    surnameInputElements.forEach((surnameInputElement) => {
+      fireEvent.change(surnameInputElement, { target: { value: 'Lopata' } });
+    });
+
+    ageInputElements.forEach((ageInputElement) => {
+      fireEvent.change(ageInputElement, { target: { value: '43' } });
+    });
+
+    citySelectElements.forEach((citySelectElement) => {
+      fireEvent.click(citySelectElement);
+      const cityOptions = screen.getAllByText('Ogre');
+      cityOptions.forEach((cityElement) => {
+        fireEvent.click(cityElement);
+      });
+    });
+
+    fireEvent.click(submitButtonElements[0]);
+
+    const tableRows = screen.getAllByTestId('table-row');
+    expect(tableRows).toHaveLength(1);
+
+    const tableRowCells = tableRows[0].querySelectorAll('td');
+    expect(tableRowCells[0]).toHaveTextContent('Sonia');
+    expect(tableRowCells[1]).toHaveTextContent('Lopata');
+    expect(tableRowCells[2]).toHaveTextContent('43');
+    expect(tableRowCells[3]).toHaveTextContent('Ogre');
+
+    act(() => {
+      jest.advanceTimersByTime(3000);
+    });
+
+    const toastMessage = screen.getByTestId('toast-message');
+    const toastMessageText = toastMessages.find((message) => message.key === 'addMemberSuccess');
+    expect(toastMessage).toBeInTheDocument();
+    expect(toastMessage).toHaveTextContent(toastMessageText.message);
   });
 });
