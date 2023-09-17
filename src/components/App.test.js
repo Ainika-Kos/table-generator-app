@@ -427,7 +427,7 @@ describe('Toast messages', () => {
   afterEach(() => {
     jest.clearAllTimers();
   });
-  
+
   test('Shows success message, when member data is added', () => {
     const nameInputElements = screen.getAllByTestId('memberName');
     const surnameInputElements = screen.getAllByTestId('memberSurname');
@@ -472,6 +472,23 @@ describe('Toast messages', () => {
 
     const toastMessage = screen.getByTestId('toast-message');
     const toastMessageText = toastMessages.find((message) => message.key === 'addMemberSuccess');
+    expect(toastMessage).toBeInTheDocument();
+    expect(toastMessage).toHaveTextContent(toastMessageText.message);
+  });
+
+  test('Shows error message on deleting initial table', () => {
+    
+    const deleteBtns = screen.getAllByTestId('btn-delete');
+    expect(deleteBtns).toHaveLength(3);
+
+    fireEvent.click(deleteBtns[0]);
+
+    act(() => {
+      jest.advanceTimersByTime(3000);
+    });
+
+    const toastMessage = screen.getByTestId('toast-message');
+    const toastMessageText = toastMessages.find((message) => message.key === 'unableToDeleteTable');
     expect(toastMessage).toBeInTheDocument();
     expect(toastMessage).toHaveTextContent(toastMessageText.message);
   });
