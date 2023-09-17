@@ -476,10 +476,29 @@ describe('Toast messages', () => {
     expect(toastMessage).toHaveTextContent(toastMessageText.message);
   });
 
+  test('Shows success message on copying table', () => {
+    
+    const copyBtn = screen.getAllByTestId('btn-copy');
+
+    fireEvent.click(copyBtn[0]);
+
+    const newCopiedTables = screen.getAllByTestId('copied-table');
+    expect(newCopiedTables).toHaveLength(3);
+
+    act(() => {
+      jest.advanceTimersByTime(3000);
+    });
+
+    const toastMessage = screen.getByTestId('toast-message');
+    const toastMessageText = toastMessages.find((message) => message.key === 'copyTableSuccess');
+    expect(toastMessage).toBeInTheDocument();
+    expect(toastMessage).toHaveTextContent(toastMessageText.message);
+  });
+
   test('Shows error message on deleting initial table', () => {
     
     const deleteBtns = screen.getAllByTestId('btn-delete');
-    expect(deleteBtns).toHaveLength(3);
+    expect(deleteBtns).toHaveLength(4);
 
     fireEvent.click(deleteBtns[0]);
 
