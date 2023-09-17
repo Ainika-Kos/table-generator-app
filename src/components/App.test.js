@@ -511,4 +511,24 @@ describe('Toast messages', () => {
     expect(toastMessage).toBeInTheDocument();
     expect(toastMessage).toHaveTextContent(toastMessageText.message);
   });
+
+  test('Shows info message on modal closing without saving data', () => {
+
+    const editBtn = screen.getAllByTestId('btn-edit');
+    fireEvent.click(editBtn[0]);
+
+    const modalForm = screen.getByTestId('modal-form');
+    expect(modalForm).toBeInTheDocument();
+    const modalClose = modalForm.querySelector('[data-testid="form-close"]');
+    fireEvent.click(modalClose);
+
+    act(() => {
+      jest.advanceTimersByTime(3000);
+    });
+
+    const toastMessage = screen.getByTestId('toast-message');
+    const toastMessageText = toastMessages.find((message) => message.key === 'noChangesInfo');
+    expect(toastMessage).toBeInTheDocument();
+    expect(toastMessage).toHaveTextContent(toastMessageText.message);
+  });
 });
