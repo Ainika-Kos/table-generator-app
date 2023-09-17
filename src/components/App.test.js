@@ -393,4 +393,28 @@ describe('Table row data actions', () => {
     expect(tableRowCells[0]).toHaveTextContent('Lucky');
     expect(tableRowCells[2]).toHaveTextContent('69');
   });
+
+  test('Deletes member data', () => {
+
+    const tableRows = screen.getAllByTestId('table-row');
+    const tableRowCells = tableRows[0].querySelectorAll('td');
+
+    expect(tableRowCells[0]).toHaveTextContent('Lucky');
+    expect(tableRowCells[1]).toHaveTextContent('Lopata');
+    expect(tableRowCells[2]).toHaveTextContent('69');
+    expect(tableRowCells[3]).toHaveTextContent('Ogre');
+
+    expect(tableRows.length).toBeGreaterThan(0);
+
+    const deleteRowBtns = screen.getAllByTestId('btn-delete-row');
+    console.log(deleteRowBtns.length);
+
+    deleteRowBtns.forEach((deleteRowBtn) => {
+      fireEvent.click(deleteRowBtn);
+    });
+
+    const remainingTableRows = screen.queryAllByTestId('table-row');
+    expect(remainingTableRows.length).toBe(0);
+
+  });
 });
