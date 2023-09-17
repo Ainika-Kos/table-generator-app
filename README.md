@@ -18,3 +18,16 @@
 ### `npm test`
 
 ---
+
+### Table Generator main requirements
+1. Only the first table can be filled in, while the others can only be edited
+2. The "Copy" button for a table means that its current state is copied, and a copy of it appears below that table
+3. The "Delete Table" button deletes the table (the original table cannot be deleted)
+4. Editing and deleting columns (data is changed, and the entire row is deleted only in the table where the manipulations are performed)
+5. In the input form, placeholders should disappear when focused
+6. Form 1 and 2 are responsible for adding records to the table, and their placement on the page can be arbitrary
+7. If something is typed in form 1, it is updated in form 2 as well
+8. The modal form appears when you click on "Edit" (the data in forms 1 and 2 should not be affected)
+9. The placement of the modal form is arbitrary
+10. Changes can only be saved after clicking the "Agree" button
+11. After saving the changes, the modal form closes
