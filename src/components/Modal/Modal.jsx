@@ -1,5 +1,6 @@
 import './Modal.sass';
 import Form from '../Form/Form';
+
 const Modal = ({ existingMemberData, handleAddMemberChange, handleEditMemberSubmit, handleCloseModal, tableId, isEditForm }) => {
 
   return (

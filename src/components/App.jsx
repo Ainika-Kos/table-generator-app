@@ -5,8 +5,8 @@ import Button from './Button/Button';
 import Form from './Form/Form';
 import Modal from './Modal/Modal';
 import SwitchToggler from './SwitchToggler/SwitchToggler';
-import Toast from './Toast/Toast'
 import Table from './Table/Table';
+import Toast from './Toast/Toast'
 import deleteIcon from '../assets/deleteIcon.svg';
 import toastMessages from '../data/toastMessages';
 
@@ -35,15 +35,19 @@ function App() {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
   const [initialLoad, setInitialLoad] = useState(true);
 
+  
+  // getting tables data from local storage
   const loadDataFromLocalStorage = () => {
     const storedData = localStorage.getItem(LOCAL_STORAGE_KEY);
     return storedData ? JSON.parse(storedData) : null;
   };
 
+  // saving tables data in local storage
   const saveDataToLocalStorage = (data) => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data));
   };
 
+  // useEffect hook for tables data getting on page loading 
   useEffect(() => {
     const loadedData = loadDataFromLocalStorage();
     if (loadedData) {
@@ -53,6 +57,7 @@ function App() {
     setInitialLoad(false);
   }, []);
 
+  // useEffect hook for saving data in the local storage on data changing
   useEffect(() => {
     if (!initialLoad) {
       saveDataToLocalStorage({
@@ -62,6 +67,7 @@ function App() {
     }
   }, [members, copiedTables, initialLoad]);
 
+  // handling changing data in the form inputs
   const handleAddMemberChange = (e) => {
     e.preventDefault();
 
@@ -72,9 +78,9 @@ function App() {
     } else {
       setAddMemberData({ ...addMemberData, [name]: value })
     }
-
   };
 
+  // handling new member data submitting
   const handleAddMemberSubmit = (e) => {
     e.preventDefault();
 
@@ -91,6 +97,7 @@ function App() {
     handleAddMember(newMember);
   };
   
+  // handling new member data saving
   const handleAddMember = (newMember) => {
     const newMembers = [...members, newMember];
     setMembers(newMembers);
@@ -98,6 +105,7 @@ function App() {
     handleShowToast('addMemberSuccess');
   };
 
+  // handling open modal form and setting the data to change (for specific table by tableId)
   const handleOpenModalForm = (memberId, tableId) => {
     if (tableId === initialTableId) {
 
@@ -118,12 +126,14 @@ function App() {
     setModalIsOpen(true);
   }
 
+  // handling close modal form
   const handleCloseModalForm = () => {
     setModalIsOpen(false);
     setIsEditMember(false);
     handleShowToast('noChangesInfo');
   }
 
+  // handling editing member data for specific member by editedMemberId and in specific table by tableId
   const handleEditMemberSubmit = (e, tableId) => {
     e.preventDefault();
 
@@ -163,6 +173,7 @@ function App() {
     handleShowToast('savedChangesSuccess');
   };
 
+  // handling reseting data in changed member data state
   const handleResetModalForm = () => {
     setModalIsOpen(false);
     setIsEditMember(false);
@@ -170,6 +181,7 @@ function App() {
     setEditableTableId(initialTableId);
   }
 
+  // handling deleting a specific member data by memberId and in specific table by tableId
   const handleDeletetMember = (memberId, tableId) => {
 
     if (tableId === initialTableId) {
@@ -200,6 +212,7 @@ function App() {
     setCopiedTables(updatedCopiedTables);
   }
 
+  // handling table copiyng
   const handleTableCopy = (tableId) => {
 
     const newCopiedTableId = uuid();
@@ -232,6 +245,7 @@ function App() {
     }
   };
 
+  // handling table deleting
   const handleTableDelete = (tableId) => {
     const newCopiedTables = copiedTables.filter((table) => table.id !== tableId);
     if (tableId !== initialTableId) {
@@ -242,12 +256,14 @@ function App() {
     }
   }
 
+  // handling toggling the body theme
   const toggleTheme = () => {
     const newDarkTheme = !isDarkTheme;
     setIsDarkTheme(newDarkTheme);
     document.body.classList.toggle('dark-theme', newDarkTheme);
   };
 
+  // handling showing toast messages
   const handleShowToast = (toastKey) => {
     const index = toastMessages.findIndex((toast) => toast.key === toastKey);
     const selectedToast = toastMessages[index];
@@ -261,6 +277,7 @@ function App() {
     }
   };
 
+  // useEffect hook for toast queue - used to display toast messages for various events where it is called consequently
   useEffect(() => {
     if (toastQueue.length > 0) {
       const timer = setTimeout(() => {

@@ -1,16 +1,18 @@
 import './SelectField.sass';
 import { useState, useEffect } from 'react';
-import cities from '../../data/cities';
 import arrowIcon from '../../assets/arrowIcon.svg'
+import cities from '../../data/cities';
 
 const SelectField = ({ name, onChange, value, isControlledInput, errorStyle }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState(value);
 
+  // useEffect hook for changing the selected value state on calue changes
   useEffect(() => {
     setSelectedValue(value);
   }, [value]);
 
+  // handling the selection of an option in the dropdown
   const handleSelect = (option) => {
     if (!isControlledInput) {
       setSelectedValue(option);

@@ -1,8 +1,8 @@
 import './Form.sass';
 import { useState, useEffect } from 'react';
+import Button from '../Button/Button';
 import InputField from '../InputField/InputField';
 import SelectField from '../SelectField/SelectField';
-import Button from '../Button/Button';
 import deleteIcon from '../../assets/deleteIcon.svg'
 import validationProperties from '../../data/validationSettings';
 
@@ -11,6 +11,7 @@ const Form = ({ addMemberData, handleAddMemberChange, handleAddMemberSubmit, isC
   const [formisValid, setFormIsValid] = useState(false);
   const [errors, setErrors] = useState({});
 
+  // useEffect hook for form validation on data changing in the form fields
   useEffect(() => {
     const validateForm = () => {
 
@@ -53,7 +54,7 @@ const Form = ({ addMemberData, handleAddMemberChange, handleAddMemberSubmit, isC
       {isEditForm && (
         <span className='App__form__close' onClick={handleCloseModal} data-testid='form-close'>
           <img src={deleteIcon} alt="Close Icon" />
-          </span>
+        </span>
       )}
       <InputField
         name='memberName'
