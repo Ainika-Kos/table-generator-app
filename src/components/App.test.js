@@ -297,7 +297,7 @@ describe('Form submission', () => {
   });
 });
 
-describe('Opens and closes Modal form', () => {
+describe('Modal form actions', () => {
   beforeEach(() => {
     render(<App />);
   });
@@ -331,26 +331,28 @@ describe('Opens and closes Modal form', () => {
   });
 });
 
-describe('Makes copy of the table and deletes the table', () => {
+describe('Table actions', () => {
   beforeEach(() => {
     render(<App />);
   });
 
   test('Makes table copy', () => {
     const copyBtn = screen.getByTestId('btn-copy');
+    
     fireEvent.click(copyBtn);
     const copiedTable = screen.queryByTestId('copied-table');
     expect(copiedTable).toBeInTheDocument();
+
     fireEvent.click(copyBtn);
     const copiedTables = screen.getAllByTestId('copied-table');
     expect(copiedTables).toHaveLength(2);
+
     fireEvent.click(copyBtn);
     const newCopiedTables = screen.getAllByTestId('copied-table');
     expect(newCopiedTables).toHaveLength(3);
   });
 
   test('Deletes a table', () => {
-
     const deleteBtns = screen.getAllByTestId('btn-delete');
     expect(deleteBtns).toHaveLength(4);
 
@@ -358,5 +360,37 @@ describe('Makes copy of the table and deletes the table', () => {
 
     const newCopiedTables = screen.getAllByTestId('copied-table');
     expect(newCopiedTables).toHaveLength(2);
+  });
+});
+
+describe('Table row data actions', () => {
+  beforeEach(() => {
+    render(<App />);
+  });
+
+  test('Saves edited member data', () => {
+    const editBtn = screen.getAllByTestId('btn-edit');
+    fireEvent.click(editBtn[0]);
+
+    const modalTitle = screen.getByText('Editing form');
+    const modalSubmitButton = screen.getByText('Agree');
+
+    expect(modalTitle).toBeInTheDocument();
+    expect(modalSubmitButton).toBeInTheDocument();
+
+    const modalForm = screen.getByTestId('modal-form');
+    const nameInput = modalForm.querySelector('[data-testid="memberName"]');
+    const ageInput = modalForm.querySelector('[data-testid="memberAge"]');
+    const saveButton = modalForm.querySelector('[data-testid="btn-submit"]');
+    
+    fireEvent.change(nameInput, { target: { value: 'Lucky' } });
+    fireEvent.change(ageInput, { target: { value: '69' } });
+    fireEvent.click(saveButton);
+
+    const tableRows = screen.getAllByTestId('table-row');
+    const tableRowCells = tableRows[0].querySelectorAll('td');
+    
+    expect(tableRowCells[0]).toHaveTextContent('Lucky');
+    expect(tableRowCells[2]).toHaveTextContent('69');
   });
 });

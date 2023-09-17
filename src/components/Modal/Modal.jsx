@@ -6,6 +6,7 @@ const Modal = ({ existingMemberData, handleAddMemberChange, handleEditMemberSubm
     <div
       className='App__modal-container'
       onClick={(e) => { if (e.target.className === 'App__modal-container') handleCloseModal()}}
+      data-testid='modal-form'
     >
       <Form
         addMemberData={existingMemberData}
